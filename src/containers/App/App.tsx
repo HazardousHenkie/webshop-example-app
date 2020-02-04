@@ -4,7 +4,7 @@ import Routes from './routes'
 
 import Container from '@material-ui/core/Container'
 
-import theme from 'styling/styledComponentsTheme'
+import theme from 'styles/styledComponentsTheme'
 import { ThemeProvider } from 'styled-components'
 
 const App: React.FC = () => {
