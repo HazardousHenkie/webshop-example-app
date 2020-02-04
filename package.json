@@ -61,7 +61,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:ts-styled"
+      "pre-commit": "npm run lint:tslint"
     }
   },
   "browserslist": {
