@@ -37,7 +37,6 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:ts": "npm run lint:tslint",
     "lint:tslint": "tslint --config ./tslint.json src/**/*.{ts,tsx} --project ./tsconfig.json --fix && npm run typecheck",
-    "lint:ts-styled":  "npm run lint:tslint && npm run lint:css",
     "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
@@ -61,7 +60,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:tslint"
+      "pre-commit": "npm run lint:staged"
     }
   },
   "browserslist": {
