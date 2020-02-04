@@ -7,5 +7,5 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 `
-console.log()
+
 export default GlobalStyle

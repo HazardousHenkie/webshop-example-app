@@ -21,7 +21,7 @@ ReactDOM.render(
     <GlobalStyle />
     <CssBaseline />
     <Router history={history}>
-      <StylesProvider injectFirst>
+      <StylesProvider injectFirst={true}>
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>

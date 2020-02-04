@@ -19,7 +19,17 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "pretty": true,
-    "removeComments": true
+    "removeComments": true,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "strictFunctionTypes": false,
+    "sourceMap": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }

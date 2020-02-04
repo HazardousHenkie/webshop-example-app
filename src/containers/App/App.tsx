@@ -11,7 +11,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Container fixed>
+        <Container fixed={true}>
           <Routes />
         </Container>
       </div>
