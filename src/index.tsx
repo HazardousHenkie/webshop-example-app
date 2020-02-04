@@ -14,19 +14,27 @@ import theme from 'styles/themeStyles'
 import GlobalStyle from 'styles/index'
 import 'typeface-roboto'
 
+import { Provider } from 'react-redux'
+import configureStore from './configureStore'
+
 import * as serviceWorker from './serviceWorker'
+
+const initialState = {}
+const store = configureStore(initialState, history)
 
 ReactDOM.render(
   <>
-    <GlobalStyle />
-    <CssBaseline />
-    <Router history={history}>
-      <StylesProvider injectFirst={true}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </StylesProvider>
-    </Router>
+    <Provider store={store}>
+      <GlobalStyle />
+      <CssBaseline />
+      <Router history={history}>
+        <StylesProvider injectFirst={true}>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </StylesProvider>
+      </Router>
+    </Provider>
   </>,
   document.getElementById('root')
 )

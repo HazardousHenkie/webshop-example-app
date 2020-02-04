@@ -1,6 +1,7 @@
 import { Reducer, Store } from 'redux'
 import { RouterState } from 'connected-react-router'
 import { Saga } from 'redux-saga'
+import { ContainerState as HomeProviderState } from 'containers/Home/types'
 
 export interface InjectedStore extends Store {
   injectedReducers: any
@@ -25,6 +26,7 @@ export interface InjectSagaParams {
 // Your root reducer type, which is your redux state types also
 export interface ApplicationRootState {
   readonly router: RouterState
+  readonly myBoolean: HomeProviderState
   // for testing purposes
   readonly test: any
 }
