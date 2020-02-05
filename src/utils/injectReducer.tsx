@@ -48,7 +48,7 @@ const useInjectReducer = ({ key, reducer }: InjectReducerParams) => {
   const store = useStore() as InjectedStore
   React.useEffect(() => {
     getInjectors(store).injectReducer(key, reducer)
-  }, [])
+  }, [key, reducer, store])
 }
 
 export { useInjectReducer }

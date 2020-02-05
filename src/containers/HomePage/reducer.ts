@@ -2,20 +2,21 @@ import ActionTypes from './constants'
 import { ContainerState, ContainerActions } from './types'
 
 export const initialState: ContainerState = {
-  myBoolean: false
+  awesome: false
 }
 
-function languageProviderReducer(
+function homeReducer(
   state: ContainerState = initialState,
   action: ContainerActions
 ): ContainerState {
   switch (action.type) {
-    case ActionTypes.CHANGE_BOOLEAN:
+    case ActionTypes.CHANGE_AWESOME:
       return {
-        myBoolean: action.payload
+        awesome: action.payload
       }
     default:
       return state
   }
 }
-export default languageProviderReducer
+
+export default homeReducer

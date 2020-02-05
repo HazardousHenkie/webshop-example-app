@@ -22,17 +22,9 @@ export default function configureStore(
   let enhancer = applyMiddleware(...middlewares)
 
   // If Redux Dev Tools and Saga Dev Tools Extensions are installed, enable them
-  /* istanbul ignore next */
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
     enhancer = composeWithDevTools(enhancer)
   }
-
-  // NOTE: Uncomment the code below to restore support for Redux Saga
-  // Dev Tools once it supports redux-saga version 1.x.x
-  // if (window.__SAGA_MONITOR_EXTENSION__)
-  //   reduxSagaMonitorOptions = {
-  //     sagaMonitor: window.__SAGA_MONITOR_EXTENSION__,
-  //   };
 
   // Create the store with two middlewares
   // 1. sagaMiddleware: Makes redux-sagas work
@@ -50,7 +42,6 @@ export default function configureStore(
   store.injectedSagas = {} // Saga registry
 
   // Make reducers hot reloadable, see http://mxs.is/googmo
-  /* tslint ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers))

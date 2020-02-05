@@ -26,7 +26,8 @@ export interface InjectSagaParams {
 // Your root reducer type, which is your redux state types also
 export interface ApplicationRootState {
   readonly router: RouterState
-  readonly myBoolean: HomeProviderState
+  readonly awesome: HomeProviderState
+  readonly home: HomeState
   // for testing purposes
   readonly test: any
 }

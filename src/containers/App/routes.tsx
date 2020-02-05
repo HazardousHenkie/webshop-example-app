@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import * as routes from 'utils/routes'
 
 import Loader from 'components/Loader'
-const Home = lazy(() => import('../Home'))
+const Home = lazy(() => import('../HomePage'))
 const Error = lazy(() => import('../Error'))
 
 const Routes: React.FC = () => {

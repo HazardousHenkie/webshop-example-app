@@ -3,9 +3,8 @@ import * as actions from './actions'
 import { ApplicationRootState } from 'types'
 
 /* --- STATE --- */
-
-interface MyBooleanProviderState {
-  readonly myBoolean: boolean
+interface HomeState {
+  readonly awesome: boolean
 }
 
 /* --- ACTIONS --- */
@@ -13,7 +12,7 @@ type AppActions = ActionType<typeof actions>
 
 /* --- EXPORTS --- */
 type RootState = ApplicationRootState
-type ContainerState = MyBooleanProviderState
+type ContainerState = HomeState
 type ContainerActions = AppActions
 
 export { RootState, ContainerState, ContainerActions }
