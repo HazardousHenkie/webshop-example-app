@@ -1,5 +1,5 @@
 const theme = {
-  colorExample: '#721c24',
+  black: '#000',
   breakpoints: {
     up: {
       xxs: 'min-width: 0',
