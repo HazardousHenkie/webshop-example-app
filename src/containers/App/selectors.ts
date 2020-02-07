@@ -1,14 +1,22 @@
 import { createSelector } from 'reselect'
 import { ApplicationRootState } from '../../types'
 
-const selectGlobal = (state: ApplicationRootState) => {
-  return state.global
+const selectAuthentication = (state: ApplicationRootState) => {
+  return state.authentication
 }
 
 const makeSelectLoading = () =>
-  createSelector(selectGlobal, globalState => globalState.loading)
-
+  createSelector(selectAuthentication, subState => subState.loading)
 const makeSelectError = () =>
-  createSelector(selectGlobal, globalState => globalState.error)
+  createSelector(selectAuthentication, subState => subState.error)
+const makeSelectLoggedIn = () =>
+  createSelector(selectAuthentication, subState => subState.loggedIn)
+const makeSelectCurrentUser = () =>
+  createSelector(selectAuthentication, subState => subState.currentUser)
 
-export { selectGlobal, makeSelectLoading, makeSelectError }
+export {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectLoggedIn,
+  makeSelectCurrentUser
+}

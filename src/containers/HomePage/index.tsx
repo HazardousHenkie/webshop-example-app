@@ -9,6 +9,8 @@ import { changeAwesome } from './actions'
 // import { makeSelectUsername } from './selectors'
 import reducer from './reducer'
 
+import withAuthorization from 'components/Authentication'
+
 const key = 'home'
 
 // const stateSelector = createSelector(makeSelectUsername(), awesome => ({
@@ -27,4 +29,4 @@ const HomePage: React.FC = () => {
   return <button onClick={onChangeAwesome}>Change is awesome</button>
 }
 
-export default HomePage
+export default withAuthorization(HomePage)

@@ -1,5 +1,7 @@
-import firebase from 'firebase'
-import '@firebase/firestore'
+import * as firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+import 'firebase/analytics'
 import ReduxSagaFirebase from 'redux-saga-firebase'
 
 const prodConfig = {
@@ -26,9 +28,9 @@ const devConfig = {
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig
 
-const myFirebaseApp = firebase.initializeApp(config)
+const FirebaseApp = firebase.initializeApp(config)
 firebase.analytics()
 
-const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
+const reduxSagaFirebase = new ReduxSagaFirebase(FirebaseApp)
 
 export default reduxSagaFirebase

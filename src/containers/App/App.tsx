@@ -14,19 +14,27 @@ import Loader from 'components/Loader'
 
 import { makeSelectLoading } from 'containers/App/selectors'
 
+import { useInjectSaga } from 'utils/injectSaga'
+import saga from './sagas'
+
 const stateSelector = createSelector(makeSelectLoading(), loading => ({
   loading
 }))
 
+const key = 'authentication'
+
 const App: React.FC = () => {
   const { loading } = useSelector(stateSelector)
 
+  useInjectSaga({ key, saga })
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Container fixed={true}>
-          <Routes />
-        </Container>
+        {!loading && (
+          <Container fixed={true}>
+            <Routes />
+          </Container>
+        )}
 
         {loading && <Loader />}
       </div>

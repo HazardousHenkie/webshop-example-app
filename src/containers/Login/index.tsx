@@ -1,23 +1,16 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { createSelector } from 'reselect'
 
-import { useInjectReducer } from 'utils/injectReducer'
-import { useInjectSaga } from 'utils/injectSaga'
+import { login } from '../App/actions'
 
-import { login } from './actions'
-import { makeSelectLoginData } from './selectors'
-import { makeSelectError, makeSelectLoading } from 'containers/App/selectors'
-import reducer from './reducer'
-import saga from './saga'
+import { makeSelectError } from 'containers/App/selectors'
 
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-
-import history from 'utils/history'
 
 import {
   PaperWrapper,
@@ -29,20 +22,16 @@ import {
 
 import ErrorMessage from 'components/ErrorMessage'
 
-import { home, forgotPassword } from 'utils/routes'
-
-const key = 'login'
+import { forgotPassword } from 'utils/routes'
 
 interface Values {
   email: string
   password: string
 }
 
-const stateSelector = createStructuredSelector({
-  error: makeSelectError(),
-  loading: makeSelectLoading(),
-  loginData: makeSelectLoginData()
-})
+const stateSelector = createSelector(makeSelectError(), error => ({
+  error
+}))
 
 const SigninScheme = Yup.object().shape({
   email: Yup.string()
@@ -55,17 +44,11 @@ const SigninScheme = Yup.object().shape({
 
 const LoginPage: React.FC = () => {
   const { error } = useSelector(stateSelector)
-
   const dispatch = useDispatch()
 
   const submitForm = (values: Values) => {
     dispatch(login(values))
-
-    history.push(home)
   }
-
-  useInjectReducer({ key, reducer })
-  useInjectSaga({ key, saga })
 
   return (
     <PaperWrapper>

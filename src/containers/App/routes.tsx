@@ -14,6 +14,7 @@ const Routes: React.FC = () => {
       <Switch>
         <Route path={routes.login} exact={true} component={Login} />
         <Route path={routes.home} exact={true} component={Home} />
+        <Route path="/test" exact={true} component={Home} />
         <Route component={Error} />
       </Switch>
     </Suspense>

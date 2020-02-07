@@ -1,27 +1,55 @@
-import { ContainerState, ContainerActions } from './types'
+import {
+  ContainerStateAuthentication,
+  ContainerAuthenticationActions
+} from './types'
 import ActionTypes from './constants'
 
-export const initialState: ContainerState = {
+export const initialStateAuthentication: ContainerStateAuthentication = {
   error: false,
-  loading: false
+  loading: true,
+  loggedIn: false,
+  currentUser: ''
 }
 
-function appReducer(
-  state: ContainerState = initialState,
-  action: ContainerActions
-): ContainerState {
+function authenticationReducer(
+  state: ContainerStateAuthentication = initialStateAuthentication,
+  action: ContainerAuthenticationActions
+): ContainerStateAuthentication {
   switch (action.type) {
-    case ActionTypes.LOAD_ERROR:
+    case ActionTypes.LOGOUT:
+    case ActionTypes.LOGIN:
       return {
-        error: action.payload
+        error: false,
+        loading: true,
+        loggedIn: state.loggedIn,
+        currentUser: state.currentUser
       }
-    case ActionTypes.SET_LOADING:
+    case ActionTypes.LOGIN_SUCCESS:
       return {
-        loading: action.payload
+        error: state.error,
+        loading: false,
+        loggedIn: true,
+        currentUser: action.payload
+      }
+    case ActionTypes.LOGOUT_ERROR:
+    case ActionTypes.LOGIN_ERROR:
+      const { error, loading, ...rest } = state
+      return {
+        error: action.payload,
+        loading: false,
+        loggedIn: false,
+        ...rest
+      }
+    case ActionTypes.LOGOUT_SUCCESS:
+      return {
+        error: state.error,
+        loading: false,
+        loggedIn: false,
+        currentUser: ''
       }
     default:
       return state
   }
 }
 
-export default appReducer
+export default authenticationReducer

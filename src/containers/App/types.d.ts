@@ -1,19 +1,37 @@
 import { ActionType } from 'typesafe-actions'
-import * as actions from './actions'
+import setLocation from './actions'
+import {
+  login,
+  loginSuccess,
+  loginError,
+  logout,
+  logoutSuccess,
+  logoutError
+} from './actions'
 import { ApplicationRootState } from '../../types'
 
-/* --- STATE --- */
-interface AppState {
-  readonly loading?: boolean
+interface AuthenticationState {
+  readonly loading: boolean
   readonly error?: object | boolean
+  readonly loggedIn: boolean
+  readonly currentUser: string
 }
 
-/* --- ACTIONS --- */
-type AppActions = ActionType<typeof actions>
+type authenticationActions = ActionType<
+  | typeof login
+  | loginSuccess
+  | loginError
+  | logout
+  | logoutSuccess
+  | logoutError
+>
 
-/* --- EXPORTS --- */
 type RootState = ApplicationRootState
-type ContainerState = AppState
-type ContainerActions = AppActions
+type ContainerStateAuthentication = AuthenticationState
+type ContainerAuthenticationActions = authenticationActions
 
-export { RootState, ContainerState, ContainerActions }
+export {
+  RootState,
+  ContainerStateAuthentication,
+  ContainerAuthenticationActions
+}

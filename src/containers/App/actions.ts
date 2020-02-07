@@ -2,8 +2,13 @@ import { action } from 'typesafe-actions'
 
 import ActionTypes from './constants'
 
-export const loadingError = (error: object) =>
-  action(ActionTypes.LOAD_ERROR, error)
+export const login = (params: object) => action(ActionTypes.LOGIN, params)
+export const loginSuccess = (username: string) =>
+  action(ActionTypes.LOGIN_SUCCESS, username)
+export const loginError = (error: object) =>
+  action(ActionTypes.LOGIN_ERROR, error)
 
-export const setLoading = (loading: boolean) =>
-  action(ActionTypes.SET_LOADING, loading)
+export const logout = () => action(ActionTypes.LOGOUT)
+export const logoutSuccess = () => action(ActionTypes.LOGOUT_SUCCESS)
+export const logoutError = (error: object) =>
+  action(ActionTypes.LOGOUT_ERROR, error)
