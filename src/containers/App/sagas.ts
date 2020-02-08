@@ -1,45 +1,63 @@
 import reduxSagaFirebase from 'utils/firebase'
 
 import { push } from 'connected-react-router'
-import { login, home } from 'utils/routes'
+import { loginLink, home } from 'utils/routes'
 
 import { call, take, put, takeLatest, fork } from 'redux-saga/effects'
 
-import { loginSuccess, loginError, logoutSuccess, logoutError } from './actions'
+import {
+  loginSuccess,
+  loginError,
+  logoutSuccess,
+  logoutError,
+  loaderStart,
+  loaderEnd
+} from './actions'
 import ActionTypes from './constants'
 
 function* loginSaga(params: Record<string, any>) {
   try {
+    yield put(loaderStart())
     yield call(
       reduxSagaFirebase.auth.signInWithEmailAndPassword,
-      params.payload.email,
-      params.payload.password
+      params.payload.values.email,
+      params.payload.values.password
     )
+
+    if (params.payload.url) {
+      yield put(push(params.payload.url))
+    } else {
+      yield put(push(home))
+    }
   } catch (error) {
     yield put(loginError(error))
-    yield put(push(login))
+    yield put(push(loginLink))
+    yield put(loaderEnd())
   }
 }
 
 function* logoutSaga() {
   try {
+    yield put(loaderStart())
     yield call(reduxSagaFirebase.auth.signOut)
   } catch (error) {
     yield put(logoutError(error))
+    yield put(loaderEnd())
   }
 }
 
 function* loginStatusWatcher() {
   const channel = yield call(reduxSagaFirebase.auth.channel)
-
+  yield put(loaderStart())
   while (true) {
     const { user } = yield take(channel)
 
     if (user) {
       yield put(loginSuccess(user.email))
-      yield put(push(home))
+      yield put(loaderEnd())
     } else {
       yield put(logoutSuccess())
+      yield put(loaderEnd())
     }
   }
 }

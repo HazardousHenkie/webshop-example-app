@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
+
+import { useLocation } from 'react-router-dom'
 
 import { login } from '../App/actions'
 
 import { makeSelectError } from 'containers/App/selectors'
+import { makeSelectLoggedIn } from 'containers/App/selectors'
+
+import history from 'utils/history'
+import { home } from 'utils/routes'
 
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -29,9 +35,10 @@ interface Values {
   password: string
 }
 
-const stateSelector = createSelector(makeSelectError(), error => ({
-  error
-}))
+const stateSelector = createStructuredSelector({
+  error: makeSelectError(),
+  loggedIn: makeSelectLoggedIn()
+})
 
 const SigninScheme = Yup.object().shape({
   email: Yup.string()
@@ -43,11 +50,18 @@ const SigninScheme = Yup.object().shape({
 })
 
 const LoginPage: React.FC = () => {
-  const { error } = useSelector(stateSelector)
+  const { loggedIn, error } = useSelector(stateSelector)
   const dispatch = useDispatch()
+  const location = useLocation()
+
+  useEffect(() => {
+    if (loggedIn) {
+      history.push(home)
+    }
+  }, [loggedIn])
 
   const submitForm = (values: Values) => {
-    dispatch(login(values))
+    dispatch(login({ url: location.search.split('?next=')[1], values }))
   }
 
   return (
@@ -64,11 +78,9 @@ const LoginPage: React.FC = () => {
           {({
             values,
             isSubmitting,
-            isValid,
             handleChange,
             handleBlur,
             errors,
-            handleSubmit,
             touched
           }) => (
             <Form>
@@ -110,7 +122,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 fullWidth={true}
-                disabled={isSubmitting || !isValid}
+                disabled={isSubmitting}
               >
                 Login
               </StyledSubmitButton>

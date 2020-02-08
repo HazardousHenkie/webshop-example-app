@@ -10,12 +10,17 @@ import {
 } from './actions'
 import { ApplicationRootState } from '../../types'
 
-interface AuthenticationState {
+interface LoaderState {
   readonly loading: boolean
+}
+
+interface AuthenticationState {
   readonly error?: object | boolean
   readonly loggedIn: boolean
   readonly currentUser: string
 }
+
+type LoaderActions = ActionType<typeof loaderStart | loaderEnd>
 
 type authenticationActions = ActionType<
   | typeof login
@@ -27,11 +32,15 @@ type authenticationActions = ActionType<
 >
 
 type RootState = ApplicationRootState
+type ContainerStateLoader = LoaderState
 type ContainerStateAuthentication = AuthenticationState
+type ContainerLoaderActions = loaderActions
 type ContainerAuthenticationActions = authenticationActions
 
 export {
   RootState,
+  ContainerStateLoader,
   ContainerStateAuthentication,
+  ContainerLoaderActions,
   ContainerAuthenticationActions
 }

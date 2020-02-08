@@ -2,7 +2,10 @@ import { Reducer, Store } from 'redux'
 import { RouterState } from 'connected-react-router'
 import { Saga } from 'redux-saga'
 import { ContainerState as HomeState } from 'containers/HomePage/types'
-import { ContainerStateAuthentication as AuthenticationState } from 'containers/App/types'
+import {
+  ContainerStateAuthentication,
+  ContainerStateLoader
+} from 'containers/App/types'
 import { ContainerState as LoginState } from 'containers/Login/types'
 
 export interface InjectedStore extends Store {
@@ -27,6 +30,7 @@ export interface InjectSagaParams {
 
 export interface ApplicationRootState {
   readonly router: RouterState
-  readonly authentication: AuthenticationState
+  readonly global: ContainerStateLoader
+  readonly authentication: ContainerStateAuthentication
   readonly home: HomeState
 }

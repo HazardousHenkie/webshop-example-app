@@ -21,12 +21,11 @@ const stateSelector = createSelector(makeSelectLoading(), loading => ({
   loading
 }))
 
-const key = 'authentication'
+const authenticationKey = 'authentication'
 
 const App: React.FC = () => {
   const { loading } = useSelector(stateSelector)
-
-  useInjectSaga({ key, saga })
+  useInjectSaga({ key: authenticationKey, saga })
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
