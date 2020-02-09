@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import TextField from '@material-ui/core/TextField'
-import ErrorMessage from 'components/ErrorMessage'
+import InfoMessage from 'components/InfoMessage'
 
 import {
   PaperWrapper,
@@ -15,6 +15,18 @@ import {
   StyledTypographyTitle,
   StyledSubmitButton
 } from 'containers/Login/styledComponents'
+
+import { createStructuredSelector } from 'reselect'
+
+import { sendPasswordResetEmail } from './actions'
+
+import { useInjectSaga } from 'utils/injectSaga'
+import { useInjectReducer } from 'utils/injectReducer'
+
+import reducer from './reducer'
+import saga from './saga'
+
+import { makeSelectError, makeSelectMessage } from './selectors'
 
 const ForgotPasswordscheme = Yup.object().shape({
   email: Yup.string()
@@ -26,18 +38,32 @@ interface Values {
   email: string
 }
 
+const key = 'passwordrequest'
+
+const stateSelector = createStructuredSelector({
+  message: makeSelectMessage(),
+  error: makeSelectError()
+})
+
 const ForgotPassword: React.FC = () => {
+  const { message, error } = useSelector(stateSelector)
   const dispatch = useDispatch()
+
+  useInjectReducer({ key, reducer })
+  useInjectSaga({ key, saga })
+
   const submitForm = (values: Values) => {
-    // dispatch(forgotPassword({ url: location.search.split('?next=')[1], values }))
+    dispatch(sendPasswordResetEmail(values))
   }
 
   return (
     <PaperWrapper>
       <StyledPaper variant="outlined">
         <StyledTypographyTitle align="center" variant="h1">
-          Login
+          Forgot password
         </StyledTypographyTitle>
+        do something to go to login
+        {message && <InfoMessage severity="info" message={message} />}
         <Formik
           initialValues={{ email: '' }}
           validationSchema={ForgotPasswordscheme}
@@ -46,7 +72,6 @@ const ForgotPassword: React.FC = () => {
           {({
             values,
             isSubmitting,
-            isValid,
             handleChange,
             handleBlur,
             errors,
@@ -71,14 +96,14 @@ const ForgotPassword: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 fullWidth={true}
-                disabled={isSubmitting || !isValid}
+                disabled={isSubmitting}
               >
-                Login
+                Reset password
               </StyledSubmitButton>
             </Form>
           )}
         </Formik>
-        {/* {error && <ErrorMessage errorMessage={error.toString()} />} */}
+        {error && <InfoMessage severity="error" message={error.toString()} />}
       </StyledPaper>
     </PaperWrapper>
   )

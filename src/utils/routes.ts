@@ -1,3 +1,3 @@
 export const loginLink = '/'
-export const forgotPassword = '/forget-password'
+export const forgotPassword = '/forgot-password'
 export const home = '/home'

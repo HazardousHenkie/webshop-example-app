@@ -1,24 +1,24 @@
 import React from 'react'
-// useSelector
-import { useDispatch } from 'react-redux'
-// import { createSelector } from 'reselect'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { createSelector } from 'reselect'
 
 import { useInjectReducer } from 'utils/injectReducer'
 
 import { changeAwesome } from './actions'
-// import { makeSelectUsername } from './selectors'
+import { makeSelectUsername } from './selectors'
 import reducer from './reducer'
 
 import withAuthorization from 'components/Authentication'
 
 const key = 'home'
 
-// const stateSelector = createSelector(makeSelectUsername(), awesome => ({
-//   awesome
-// }))
+const stateSelector = createSelector(makeSelectUsername(), awesome => ({
+  awesome
+}))
 
 const HomePage: React.FC = () => {
-  // const { awesome } = useSelector(stateSelector)
+  const { awesome } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
   const onChangeAwesome = () => dispatch(changeAwesome(true))

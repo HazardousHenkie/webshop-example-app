@@ -1,14 +1,14 @@
 import ActionTypes from './constants'
-import { ContainerState, ContainerActions } from './types'
+import { ContainerHomeState, ContainerHomeActions } from './types'
 
-export const initialState: ContainerState = {
+export const initialState: ContainerHomeState = {
   awesome: false
 }
 
 function homeReducer(
-  state: ContainerState = initialState,
-  action: ContainerActions
-): ContainerState {
+  state: ContainerHomeState = initialState,
+  action: ContainerHomeActions
+): ContainerHomeState {
   switch (action.type) {
     case ActionTypes.CHANGE_AWESOME:
       return {

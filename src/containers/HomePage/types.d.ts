@@ -1,18 +1,13 @@
 import { ActionType } from 'typesafe-actions'
 import * as actions from './actions'
-import { ApplicationRootState } from 'types'
 
-/* --- STATE --- */
 interface HomeState {
   readonly awesome: boolean
 }
 
-/* --- ACTIONS --- */
-type AppActions = ActionType<typeof actions>
+type HomeActions = ActionType<typeof actions>
 
-/* --- EXPORTS --- */
-type RootState = ApplicationRootState
-type ContainerState = HomeState
-type ContainerActions = AppActions
+type ContainerHomeState = HomeState
+type ContainerHomeActions = HomeActions
 
-export { RootState, ContainerState, ContainerActions }
+export { ContainerHomeState, ContainerHomeActions }

@@ -26,7 +26,7 @@ import {
   StyledSubmitButton
 } from './styledComponents'
 
-import ErrorMessage from 'components/ErrorMessage'
+import InfoMessage from 'components/InfoMessage'
 
 import { forgotPassword } from 'utils/routes'
 
@@ -70,6 +70,7 @@ const LoginPage: React.FC = () => {
         <StyledTypographyTitle align="center" variant="h1">
           Login
         </StyledTypographyTitle>
+
         <Formik
           initialValues={{ email: '', password: '' }}
           validationSchema={SigninScheme}
@@ -129,7 +130,7 @@ const LoginPage: React.FC = () => {
             </Form>
           )}
         </Formik>
-        {error && <ErrorMessage errorMessage={error.toString()} />}
+        {error && <InfoMessage severity="error" message={error.toString()} />}
       </StyledPaper>
     </PaperWrapper>
   )

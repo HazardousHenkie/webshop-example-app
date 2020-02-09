@@ -25,6 +25,7 @@ const authenticationKey = 'authentication'
 
 const App: React.FC = () => {
   const { loading } = useSelector(stateSelector)
+
   useInjectSaga({ key: authenticationKey, saga })
   return (
     <ThemeProvider theme={theme}>
