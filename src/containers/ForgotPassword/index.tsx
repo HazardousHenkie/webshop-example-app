@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SetStateAction } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -14,7 +14,7 @@ import {
   StyledPaper,
   StyledTypographyTitle,
   StyledSubmitButton
-} from 'containers/Login/styledComponents'
+} from 'styles/styledComponents'
 
 import { createStructuredSelector } from 'reselect'
 
@@ -28,6 +28,8 @@ import saga from './saga'
 
 import { makeSelectError, makeSelectMessage } from './selectors'
 
+import { loginLink } from 'utils/routes'
+
 const ForgotPasswordscheme = Yup.object().shape({
   email: Yup.string()
     .required('Required')
@@ -36,6 +38,10 @@ const ForgotPasswordscheme = Yup.object().shape({
 
 interface Values {
   email: string
+}
+
+interface FormSubmitInterface {
+  setSubmitting: React.Dispatch<SetStateAction<boolean>>
 }
 
 const key = 'passwordrequest'
@@ -52,8 +58,12 @@ const ForgotPassword: React.FC = () => {
   useInjectReducer({ key, reducer })
   useInjectSaga({ key, saga })
 
-  const submitForm = (values: Values) => {
+  const submitForm = (
+    values: Values,
+    { setSubmitting }: FormSubmitInterface
+  ) => {
     dispatch(sendPasswordResetEmail(values))
+    setSubmitting(false)
   }
 
   return (
@@ -62,8 +72,15 @@ const ForgotPassword: React.FC = () => {
         <StyledTypographyTitle align="center" variant="h1">
           Forgot password
         </StyledTypographyTitle>
-        do something to go to login
-        {message && <InfoMessage severity="info" message={message} />}
+
+        {message && (
+          <InfoMessage
+            severity="info"
+            message={message}
+            link={loginLink}
+            linkText="Back to login"
+          />
+        )}
         <Formik
           initialValues={{ email: '' }}
           validationSchema={ForgotPasswordscheme}
@@ -73,6 +90,7 @@ const ForgotPassword: React.FC = () => {
             values,
             isSubmitting,
             handleChange,
+            isValid,
             handleBlur,
             errors,
             touched
@@ -96,7 +114,7 @@ const ForgotPassword: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 fullWidth={true}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isValid}
               >
                 Reset password
               </StyledSubmitButton>

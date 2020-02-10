@@ -21,14 +21,9 @@ export default function configureStore(
 
   let enhancer = applyMiddleware(...middlewares)
 
-  // If Redux Dev Tools and Saga Dev Tools Extensions are installed, enable them
   if (process.env.NODE_ENV !== 'production' && typeof window === 'object') {
     enhancer = composeWithDevTools(enhancer)
   }
-
-  // Create the store with two middlewares
-  // 1. sagaMiddleware: Makes redux-sagas work
-  // 2. routerMiddleware: Syncs the location/URL path to the state
 
   const store = (createStore(
     createReducer(),
@@ -36,12 +31,10 @@ export default function configureStore(
     enhancer
   ) as unknown) as InjectedStore
 
-  // Extensions
   store.runSaga = sagaMiddleware.run
-  store.injectedReducers = {} // Reducer registry
-  store.injectedSagas = {} // Saga registry
+  store.injectedReducers = {}
+  store.injectedSagas = {}
 
-  // Make reducers hot reloadable, see http://mxs.is/googmo
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       store.replaceReducer(createReducer(store.injectedReducers))

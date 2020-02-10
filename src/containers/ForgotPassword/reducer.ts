@@ -20,11 +20,9 @@ function forgotPasswordReducer(
         error: false
       }
     case ActionTypes.SEND_PASSWORD_RESET_EMAIL_ERROR:
-      const { ...rest } = state
       return {
         message: state.message,
-        error: action.payload,
-        ...rest
+        error: action.payload
       }
     default:
       return state

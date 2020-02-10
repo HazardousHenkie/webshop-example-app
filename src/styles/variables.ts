@@ -1,5 +1,6 @@
 const theme = {
   black: '#000',
+  blue: 'rgb(13, 60, 97)',
   breakpoints: {
     up: {
       xxs: 'min-width: 0',

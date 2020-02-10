@@ -20,7 +20,6 @@ export default function hocWithReducer<P>({
   function wrap(
     WrappedComponent: React.ComponentType<P>
   ): React.ComponentType<P> {
-    // dont wanna give access to HOC. Child only
     class ReducerInjector extends React.Component<P> {
       public static contextType = ReactReduxContext
       public static WrappedComponent = WrappedComponent

@@ -20,7 +20,8 @@ export const StyledPaper = styled(Paper)`
 `
 
 export const StyledTypographyTitle = styled(Typography)`
-  font-size: 3rem;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 `
 
 export const StyledLink = styled(Link)`

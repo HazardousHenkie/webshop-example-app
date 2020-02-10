@@ -4,7 +4,7 @@ import Routes from './routes'
 
 import Container from '@material-ui/core/Container'
 
-import theme from 'styles/styledComponentsTheme'
+import theme from 'styles/variables'
 import { ThemeProvider } from 'styled-components'
 
 import { createSelector } from 'reselect'

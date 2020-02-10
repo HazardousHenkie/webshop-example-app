@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, SetStateAction } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -24,7 +24,7 @@ import {
   StyledTypographyTitle,
   StyledLink,
   StyledSubmitButton
-} from './styledComponents'
+} from 'styles/styledComponents'
 
 import InfoMessage from 'components/InfoMessage'
 
@@ -33,6 +33,10 @@ import { forgotPassword } from 'utils/routes'
 interface Values {
   email: string
   password: string
+}
+
+interface FormSubmitInterface {
+  setSubmitting: React.Dispatch<SetStateAction<boolean>>
 }
 
 const stateSelector = createStructuredSelector({
@@ -60,8 +64,12 @@ const LoginPage: React.FC = () => {
     }
   }, [loggedIn])
 
-  const submitForm = (values: Values) => {
+  const submitForm = (
+    values: Values,
+    { setSubmitting }: FormSubmitInterface
+  ) => {
     dispatch(login({ url: location.search.split('?next=')[1], values }))
+    setSubmitting(false)
   }
 
   return (
@@ -78,6 +86,7 @@ const LoginPage: React.FC = () => {
         >
           {({
             values,
+            isValid,
             isSubmitting,
             handleChange,
             handleBlur,
@@ -123,7 +132,7 @@ const LoginPage: React.FC = () => {
                 variant="contained"
                 color="secondary"
                 fullWidth={true}
-                disabled={isSubmitting}
+                disabled={isSubmitting || !isValid}
               >
                 Login
               </StyledSubmitButton>
