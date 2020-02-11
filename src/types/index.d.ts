@@ -1,7 +1,7 @@
 import { Reducer, Store } from 'redux'
 import { RouterState } from 'connected-react-router'
 import { Saga } from 'redux-saga'
-import { ContainerHomeState as HomeState } from 'containers/HomePage/types'
+import { ContainerProductsState as ProductsState } from 'containers/HomePage/types'
 import {
   ContainerStateAuthentication,
   ContainerStateLoader
@@ -34,5 +34,5 @@ export interface ApplicationRootState {
   readonly global: ContainerStateLoader
   readonly passwordrequest: ForgotPasswordState
   readonly authentication: ContainerStateAuthentication
-  readonly home: HomeState
+  readonly products: ProductsState
 }

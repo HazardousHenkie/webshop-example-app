@@ -6,8 +6,11 @@ import { useLocation } from 'react-router-dom'
 
 import { login } from '../App/actions'
 
-import { makeSelectError } from 'containers/App/selectors'
-import { makeSelectLoggedIn } from 'containers/App/selectors'
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectLoggedIn
+} from 'containers/App/selectors'
 
 import history from 'utils/history'
 import { home } from 'utils/routes'
@@ -26,7 +29,7 @@ import {
   StyledSubmitButton
 } from 'styles/styledComponents'
 
-import InfoMessage from 'components/InfoMessage'
+import InfoMessage from 'components/Molecules/InfoMessage'
 
 import { forgotPassword } from 'utils/routes'
 
@@ -41,6 +44,7 @@ interface FormSubmitInterface {
 
 const stateSelector = createStructuredSelector({
   error: makeSelectError(),
+  loader: makeSelectLoading(),
   loggedIn: makeSelectLoggedIn()
 })
 
@@ -54,7 +58,7 @@ const SigninScheme = Yup.object().shape({
 })
 
 const LoginPage: React.FC = () => {
-  const { loggedIn, error } = useSelector(stateSelector)
+  const { loggedIn, error, loader } = useSelector(stateSelector)
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -73,75 +77,81 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <PaperWrapper>
-      <StyledPaper variant="outlined">
-        <StyledTypographyTitle align="center" variant="h1">
-          Login
-        </StyledTypographyTitle>
+    <>
+      {!loader && (
+        <PaperWrapper>
+          <StyledPaper variant="outlined">
+            <StyledTypographyTitle align="center" variant="h1">
+              Login
+            </StyledTypographyTitle>
 
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          validationSchema={SigninScheme}
-          onSubmit={submitForm}
-        >
-          {({
-            values,
-            isValid,
-            isSubmitting,
-            handleChange,
-            handleBlur,
-            errors,
-            touched
-          }) => (
-            <Form>
-              <TextField
-                type="email"
-                label="E-mail"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                helperText={errors.email && touched.email && errors.email}
-                variant="outlined"
-                fullWidth={true}
-                margin="normal"
-              />
+            <Formik
+              initialValues={{ email: '', password: '' }}
+              validationSchema={SigninScheme}
+              onSubmit={submitForm}
+            >
+              {({
+                values,
+                isValid,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                errors,
+                touched
+              }) => (
+                <Form>
+                  <TextField
+                    type="email"
+                    label="E-mail"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={errors.email && touched.email && errors.email}
+                    variant="outlined"
+                    fullWidth={true}
+                    margin="normal"
+                  />
 
-              <TextField
-                type="password"
-                label="Password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                helperText={
-                  errors.password && touched.password && errors.password
-                }
-                variant="outlined"
-                fullWidth={true}
-                margin="normal"
-              />
+                  <TextField
+                    type="password"
+                    label="Password"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    helperText={
+                      errors.password && touched.password && errors.password
+                    }
+                    variant="outlined"
+                    fullWidth={true}
+                    margin="normal"
+                  />
 
-              <Typography variant="body1">
-                Forgot your Password?
-                <StyledLink to={forgotPassword}>Reset password!</StyledLink>
-              </Typography>
+                  <Typography variant="body1">
+                    Forgot your Password?
+                    <StyledLink to={forgotPassword}>Reset password!</StyledLink>
+                  </Typography>
 
-              <StyledSubmitButton
-                type="submit"
-                variant="contained"
-                color="secondary"
-                fullWidth={true}
-                disabled={isSubmitting || !isValid}
-              >
-                Login
-              </StyledSubmitButton>
-            </Form>
-          )}
-        </Formik>
-        {error && <InfoMessage severity="error" message={error.toString()} />}
-      </StyledPaper>
-    </PaperWrapper>
+                  <StyledSubmitButton
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    fullWidth={true}
+                    disabled={isSubmitting || !isValid}
+                  >
+                    Login
+                  </StyledSubmitButton>
+                </Form>
+              )}
+            </Formik>
+            {error && (
+              <InfoMessage severity="error" message={error.toString()} />
+            )}
+          </StyledPaper>
+        </PaperWrapper>
+      )}
+    </>
   )
 }
 

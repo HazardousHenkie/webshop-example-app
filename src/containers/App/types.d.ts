@@ -31,14 +31,12 @@ type authenticationActions = ActionType<
   | logoutError
 >
 
-type RootState = ApplicationRootState
 type ContainerStateLoader = LoaderState
 type ContainerStateAuthentication = AuthenticationState
 type ContainerLoaderActions = loaderActions
 type ContainerAuthenticationActions = authenticationActions
 
 export {
-  RootState,
   ContainerStateLoader,
   ContainerStateAuthentication,
   ContainerLoaderActions,

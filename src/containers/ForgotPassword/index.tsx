@@ -7,7 +7,7 @@ import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
 import TextField from '@material-ui/core/TextField'
-import InfoMessage from 'components/InfoMessage'
+import InfoMessage from 'components/Molecules/InfoMessage'
 
 import {
   PaperWrapper,

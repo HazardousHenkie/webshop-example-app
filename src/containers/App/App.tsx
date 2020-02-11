@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components'
 import { createSelector } from 'reselect'
 import { useSelector } from 'react-redux'
 
-import Loader from 'components/Loader'
+import Loader from 'components/Molecules/Loader'
 
 import { makeSelectLoading } from 'containers/App/selectors'
 
@@ -30,11 +30,9 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        {!loading && (
-          <Container fixed={true}>
-            <Routes />
-          </Container>
-        )}
+        <Container fixed={true}>
+          <Routes />
+        </Container>
 
         {loading && <Loader />}
       </div>

@@ -39,13 +39,6 @@ function authenticationReducer(
   action: ContainerAuthenticationActions
 ): ContainerStateAuthentication {
   switch (action.type) {
-    case ActionTypes.LOGOUT:
-    case ActionTypes.LOGIN:
-      return {
-        error: false,
-        loggedIn: state.loggedIn,
-        currentUser: state.currentUser
-      }
     case ActionTypes.LOGIN_SUCCESS:
       return {
         error: state.error,
@@ -54,7 +47,7 @@ function authenticationReducer(
       }
     case ActionTypes.LOGOUT_ERROR:
     case ActionTypes.LOGIN_ERROR:
-      const { error, ...rest } = state
+      const { ...rest } = state
       return {
         error: action.payload,
         loggedIn: false,
@@ -64,7 +57,7 @@ function authenticationReducer(
       return {
         error: state.error,
         loggedIn: false,
-        currentUser: ''
+        currentUser: state.currentUser
       }
     default:
       return state

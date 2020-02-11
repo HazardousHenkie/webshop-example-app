@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import * as routes from 'utils/routes'
 
-import Loader from 'components/Loader'
+import Loader from 'components/Molecules/Loader'
 const Home = lazy(() => import('../HomePage'))
 const Login = lazy(() => import('../Login'))
 const ForgotPassword = lazy(() => import('../ForgotPassword'))

@@ -1,22 +1,34 @@
+import { ContainerProductsState, ContainerProductsActions } from './types'
 import ActionTypes from './constants'
-import { ContainerHomeState, ContainerHomeActions } from './types'
 
-export const initialState: ContainerHomeState = {
-  awesome: false
+export const initialStateProducts: ContainerProductsState = {
+  productsData: {
+    products: []
+  },
+  error: false
 }
 
-function homeReducer(
-  state: ContainerHomeState = initialState,
-  action: ContainerHomeActions
-): ContainerHomeState {
+function productsReducer(
+  state: ContainerProductsState = initialStateProducts,
+  action: ContainerProductsActions
+): ContainerProductsState {
   switch (action.type) {
-    case ActionTypes.CHANGE_AWESOME:
+    case ActionTypes.GET_PRODUCTS_SUCCESS:
       return {
-        awesome: action.payload
+        error: state.error,
+        productsData: {
+          products: action.payload.products
+        }
+      }
+    case ActionTypes.GET_PRODUCTS_FAILED:
+      const { ...rest } = state
+      return {
+        error: action.payload,
+        ...rest
       }
     default:
       return state
   }
 }
 
-export default homeReducer
+export default productsReducer
