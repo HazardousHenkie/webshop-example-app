@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
+import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 
-// import { changeAwesome } from './actions'
 import { makeSelectProducts } from './selectors'
 import reducer from './reducer'
+import saga from './saga'
+
+import { getProducts } from './actions'
 
 import withAuthorization from 'components/Authentication'
 
@@ -21,9 +24,24 @@ const HomePage: React.FC = () => {
   const { products } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
+  useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
 
-  return <>test</>
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch])
+
+  return (
+    <>
+      home
+      <ul>
+        {products &&
+          products.map(product => (
+            <li key={product.product_id}>{product.title}</li>
+          ))}
+      </ul>
+    </>
+  )
 }
 
 export default withAuthorization(HomePage)

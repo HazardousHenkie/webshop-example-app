@@ -19,7 +19,12 @@ const withAuthorization = <Props extends object>(
   const WithAuthorization: React.FC<Props> = props => {
     const { loggedIn } = useSelector(stateSelector)
     const location = useLocation()
-
+    // useEffect(() => {
+    //   if (!loggedIn) {
+    //     history.push(loginLink)
+    //   }
+    // }, [loggedIn])
+    // check if this is correct or just remove it
     useEffect(() => {
       if (!loggedIn) {
         history.push({

@@ -8,6 +8,7 @@ import ActionTypes from './constants'
 
 export const initialStateAuthentication: ContainerStateAuthentication = {
   error: false,
+  // check this one
   loggedIn: false,
   currentUser: ''
 }
@@ -39,6 +40,13 @@ function authenticationReducer(
   action: ContainerAuthenticationActions
 ): ContainerStateAuthentication {
   switch (action.type) {
+    // and this one
+    // case ActionTypes.LOGIN:
+    //   return {
+    //     error: state.error,
+    //     loggedIn: true,
+    //     currentUser: state.currentUser
+    //   }
     case ActionTypes.LOGIN_SUCCESS:
       return {
         error: state.error,

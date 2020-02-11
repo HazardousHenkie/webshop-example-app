@@ -30,11 +30,11 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        {loading && <Loader />}
+
         <Container fixed={true}>
           <Routes />
         </Container>
-
-        {loading && <Loader />}
       </div>
     </ThemeProvider>
   )

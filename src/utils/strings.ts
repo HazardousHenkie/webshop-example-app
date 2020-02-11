@@ -1,1 +1,1 @@
-export const notFoundError = "Page wasn't found"
+export const notFoundError = "Page wasn't found."

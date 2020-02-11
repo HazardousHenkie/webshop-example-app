@@ -13,7 +13,7 @@ import {
 } from 'containers/App/selectors'
 
 import history from 'utils/history'
-import { home } from 'utils/routes'
+import { home, forgotPassword } from 'utils/routes'
 
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -30,8 +30,6 @@ import {
 } from 'styles/styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
-
-import { forgotPassword } from 'utils/routes'
 
 interface Values {
   email: string
@@ -72,8 +70,8 @@ const LoginPage: React.FC = () => {
     values: Values,
     { setSubmitting }: FormSubmitInterface
   ) => {
-    dispatch(login({ url: location.search.split('?next=')[1], values }))
     setSubmitting(false)
+    dispatch(login({ url: location.search.split('?next=')[1], values }))
   }
 
   return (

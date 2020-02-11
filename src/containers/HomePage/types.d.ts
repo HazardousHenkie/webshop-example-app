@@ -3,7 +3,7 @@ import * as actions from './actions'
 
 // move to product page when we have it
 export interface Product {
-  productId: number
+  product_id: number
   image: string
   title: string
   description: string

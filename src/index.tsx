@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 
 import App from 'containers/App/App'
 
-import { Router } from 'react-router-dom'
 import history from 'utils/history'
+import { ConnectedRouter } from 'connected-react-router'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider, StylesProvider } from '@material-ui/styles'
@@ -23,19 +23,17 @@ const initialState = {}
 const store = configureStore(initialState, history)
 
 ReactDOM.render(
-  <>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
       <GlobalStyle />
       <CssBaseline />
-      <Router history={history}>
-        <StylesProvider injectFirst={true}>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </StylesProvider>
-      </Router>
-    </Provider>
-  </>,
+      <StylesProvider injectFirst={true}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </StylesProvider>
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 )
 
