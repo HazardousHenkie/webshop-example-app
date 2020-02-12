@@ -22,7 +22,7 @@ function productsReducer(
       }
     case ActionTypes.GET_PRODUCTS_SUCCESS:
       return {
-        loading: true,
+        loading: false,
         error: state.error,
         productsData: {
           products: action.payload.products
@@ -31,7 +31,7 @@ function productsReducer(
     case ActionTypes.GET_PRODUCTS_FAILED:
       const { ...rest } = state
       return {
-        loading: true,
+        loading: false,
         error: action.payload,
         ...rest
       }
