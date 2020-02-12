@@ -5,14 +5,6 @@ import { useStore, ReactReduxContext } from 'react-redux'
 import { getInjectors } from './reducerInjectors'
 import { InjectReducerParams, InjectedStore } from 'types'
 
-/**
- * Dynamically injects a reducer
- *
- * @param {string} key A key of the reducer
- * @param {function} reducer A reducer that will be injected
- *
- */
-
 export default function hocWithReducer<P>({
   key,
   reducer
