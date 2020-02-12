@@ -33,12 +33,11 @@ function authenticationReducer(
       }
     case ActionTypes.LOGOUT_ERROR:
     case ActionTypes.LOGIN_ERROR:
-      const { ...rest } = state
       return {
         error: action.payload,
         loggedIn: false,
         loading: false,
-        ...rest
+        currentUser: ''
       }
     case ActionTypes.LOGOUT_SUCCESS:
       return {

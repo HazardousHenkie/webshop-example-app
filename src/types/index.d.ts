@@ -31,7 +31,6 @@ export interface InjectSagaParams {
 
 export interface ApplicationRootState {
   readonly router: RouterState
-  readonly global: ContainerStateLoader
   readonly passwordrequest: ForgotPasswordState
   readonly authentication: ContainerStateAuthentication
   readonly products: ProductsState
