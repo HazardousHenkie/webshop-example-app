@@ -15,6 +15,7 @@ interface Products {
 
 interface ProductsState {
   readonly productsData: Products
+  readonly loading: boolean
   readonly error?: object | boolean
 }
 

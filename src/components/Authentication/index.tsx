@@ -6,33 +6,29 @@ import history from 'utils/history'
 import { loginLink } from 'utils/routes'
 import { useLocation } from 'react-router-dom'
 
-import { createSelector } from 'reselect'
-import { makeSelectLoggedIn } from 'containers/App/selectors'
+import { createStructuredSelector } from 'reselect'
+import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
 
-const stateSelector = createSelector(makeSelectLoggedIn(), loggedIn => ({
-  loggedIn
-}))
+const stateSelector = createStructuredSelector({
+  loading: makeSelectLoading(),
+  loggedIn: makeSelectLoggedIn()
+})
 
 const withAuthorization = <Props extends object>(
   Component: React.ComponentType<Props>
 ) => {
   const WithAuthorization: React.FC<Props> = props => {
-    const { loggedIn } = useSelector(stateSelector)
+    const { loading, loggedIn } = useSelector(stateSelector)
     const location = useLocation()
-    // useEffect(() => {
-    //   if (!loggedIn) {
-    //     history.push(loginLink)
-    //   }
-    // }, [loggedIn])
-    // check if this is correct or just remove it
+
     useEffect(() => {
-      if (!loggedIn) {
+      if (!loading && !loggedIn) {
         history.push({
           pathname: loginLink,
           search: `?next=${location.pathname}`
         })
       }
-    }, [loggedIn, location.pathname])
+    }, [loading, loggedIn, location.pathname])
 
     return <Component {...(props as Props)} />
   }

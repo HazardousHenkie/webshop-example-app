@@ -42,7 +42,7 @@ interface FormSubmitInterface {
 
 const stateSelector = createStructuredSelector({
   error: makeSelectError(),
-  loader: makeSelectLoading(),
+  loading: makeSelectLoading(),
   loggedIn: makeSelectLoggedIn()
 })
 
@@ -56,7 +56,7 @@ const SigninScheme = Yup.object().shape({
 })
 
 const LoginPage: React.FC = () => {
-  const { loggedIn, error, loader } = useSelector(stateSelector)
+  const { loggedIn, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
   const location = useLocation()
 
@@ -76,7 +76,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      {!loader && (
+      {!loggedIn && !loading && (
         <PaperWrapper>
           <StyledPaper variant="outlined">
             <StyledTypographyTitle align="center" variant="h1">

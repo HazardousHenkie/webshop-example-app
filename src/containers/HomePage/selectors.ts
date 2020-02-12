@@ -11,4 +11,14 @@ const makeSelectProducts = () =>
     return substate.productsData.products
   })
 
-export { selectProducts, makeSelectProducts }
+const makeSelectLoader = () =>
+  createSelector(selectProducts, substate => {
+    return substate.loading
+  })
+
+const makeSelectError = () =>
+  createSelector(selectProducts, substate => {
+    return substate.error
+  })
+
+export { selectProducts, makeSelectProducts, makeSelectLoader, makeSelectError }

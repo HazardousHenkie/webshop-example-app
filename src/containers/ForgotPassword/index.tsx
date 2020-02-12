@@ -16,6 +16,8 @@ import {
   StyledSubmitButton
 } from 'styles/styledComponents'
 
+import Loader from 'components/Molecules/Loader'
+
 import { createStructuredSelector } from 'reselect'
 
 import { sendPasswordResetEmail } from './actions'
@@ -26,7 +28,11 @@ import { useInjectReducer } from 'utils/injectReducer'
 import reducer from './reducer'
 import saga from './saga'
 
-import { makeSelectError, makeSelectMessage } from './selectors'
+import {
+  makeSelectError,
+  makeSelectMessage,
+  makeSelectLoader
+} from './selectors'
 
 import { loginLink } from 'utils/routes'
 
@@ -48,11 +54,12 @@ const key = 'passwordrequest'
 
 const stateSelector = createStructuredSelector({
   message: makeSelectMessage(),
-  error: makeSelectError()
+  error: makeSelectError(),
+  loading: makeSelectLoader()
 })
 
 const ForgotPassword: React.FC = () => {
-  const { message, error } = useSelector(stateSelector)
+  const { message, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
   useInjectReducer({ key, reducer })
@@ -67,63 +74,66 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <PaperWrapper>
-      <StyledPaper variant="outlined">
-        <StyledTypographyTitle align="center" variant="h1">
-          Forgot password
-        </StyledTypographyTitle>
+    <>
+      {loading && <Loader />}
+      <PaperWrapper>
+        <StyledPaper variant="outlined">
+          <StyledTypographyTitle align="center" variant="h1">
+            Forgot password
+          </StyledTypographyTitle>
 
-        {message && (
-          <InfoMessage
-            severity="info"
-            message={message}
-            link={loginLink}
-            linkText="Back to login"
-          />
-        )}
-        <Formik
-          initialValues={{ email: '' }}
-          validationSchema={ForgotPasswordscheme}
-          onSubmit={submitForm}
-        >
-          {({
-            values,
-            isSubmitting,
-            handleChange,
-            isValid,
-            handleBlur,
-            errors,
-            touched
-          }) => (
-            <Form>
-              <TextField
-                type="email"
-                label="E-mail"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                helperText={errors.email && touched.email && errors.email}
-                variant="outlined"
-                fullWidth={true}
-                margin="normal"
-              />
-
-              <StyledSubmitButton
-                type="submit"
-                variant="contained"
-                color="secondary"
-                fullWidth={true}
-                disabled={isSubmitting || !isValid}
-              >
-                Reset password
-              </StyledSubmitButton>
-            </Form>
+          {message && (
+            <InfoMessage
+              severity="info"
+              message={message}
+              link={loginLink}
+              linkText="Back to login"
+            />
           )}
-        </Formik>
-        {error && <InfoMessage severity="error" message={error.toString()} />}
-      </StyledPaper>
-    </PaperWrapper>
+          <Formik
+            initialValues={{ email: '' }}
+            validationSchema={ForgotPasswordscheme}
+            onSubmit={submitForm}
+          >
+            {({
+              values,
+              isSubmitting,
+              handleChange,
+              isValid,
+              handleBlur,
+              errors,
+              touched
+            }) => (
+              <Form>
+                <TextField
+                  type="email"
+                  label="E-mail"
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  helperText={errors.email && touched.email && errors.email}
+                  variant="outlined"
+                  fullWidth={true}
+                  margin="normal"
+                />
+
+                <StyledSubmitButton
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  fullWidth={true}
+                  disabled={isSubmitting || !isValid}
+                >
+                  Reset password
+                </StyledSubmitButton>
+              </Form>
+            )}
+          </Formik>
+          {error && <InfoMessage severity="error" message={error.toString()} />}
+        </StyledPaper>
+      </PaperWrapper>
+    </>
   )
 }
 

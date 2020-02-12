@@ -32,3 +32,8 @@ export const StyledLink = styled(Link)`
 export const StyledSubmitButton = styled(Button)`
   margin-top: 20px;
 `
+
+export const Wrapper = styled.div`
+  position: relative;
+  height: 100%;
+`

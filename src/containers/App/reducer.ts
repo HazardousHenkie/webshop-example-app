@@ -1,38 +1,14 @@
 import {
-  ContainerStateLoader,
   ContainerStateAuthentication,
-  ContainerLoaderActions,
   ContainerAuthenticationActions
 } from './types'
 import ActionTypes from './constants'
 
 export const initialStateAuthentication: ContainerStateAuthentication = {
   error: false,
-  // check this one
   loggedIn: false,
+  loading: true,
   currentUser: ''
-}
-
-export const initialStateLoader: ContainerStateLoader = {
-  loading: false
-}
-
-export function loaderReducer(
-  state: ContainerStateLoader = initialStateLoader,
-  action: ContainerLoaderActions
-): ContainerStateLoader {
-  switch (action.type) {
-    case ActionTypes.LOADER_START:
-      return {
-        loading: true
-      }
-    case ActionTypes.LOADER_END:
-      return {
-        loading: false
-      }
-    default:
-      return state
-  }
 }
 
 function authenticationReducer(
@@ -40,17 +16,18 @@ function authenticationReducer(
   action: ContainerAuthenticationActions
 ): ContainerStateAuthentication {
   switch (action.type) {
-    // and this one
-    // case ActionTypes.LOGIN:
-    //   return {
-    //     error: state.error,
-    //     loggedIn: true,
-    //     currentUser: state.currentUser
-    //   }
+    case ActionTypes.LOGIN:
+      return {
+        error: state.error,
+        loggedIn: false,
+        loading: true,
+        currentUser: state.currentUser
+      }
     case ActionTypes.LOGIN_SUCCESS:
       return {
         error: state.error,
         loggedIn: true,
+        loading: false,
         currentUser: action.payload
       }
     case ActionTypes.LOGOUT_ERROR:
@@ -59,12 +36,14 @@ function authenticationReducer(
       return {
         error: action.payload,
         loggedIn: false,
+        loading: false,
         ...rest
       }
     case ActionTypes.LOGOUT_SUCCESS:
       return {
         error: state.error,
         loggedIn: false,
+        loading: false,
         currentUser: state.currentUser
       }
     default:

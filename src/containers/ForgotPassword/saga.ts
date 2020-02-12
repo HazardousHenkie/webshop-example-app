@@ -7,23 +7,18 @@ import {
   sendPasswordResetEmailError
 } from './actions'
 
-import { loaderStart, loaderEnd } from 'containers/App/actions'
-
 import ActionTypes from './constants'
 
 function* sendPasswordResetEmailSaga(params: Record<string, any>) {
   try {
-    yield put(loaderStart())
     yield call(
       // @ts-ignore
       reduxSagaFirebase.auth.sendPasswordResetEmail,
       params.payload.email
     )
     yield put(sendPasswordResetEmailSuccess())
-    yield put(loaderEnd())
   } catch (error) {
     yield put(sendPasswordResetEmailError(error))
-    yield put(loaderEnd())
   }
 }
 

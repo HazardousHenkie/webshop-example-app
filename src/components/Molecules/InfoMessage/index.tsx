@@ -6,7 +6,7 @@ import {
   MessageWrapper,
   MessageInner,
   StyledInnerLink
-} from './styledComponents/infoMessage'
+} from './styledComponents'
 
 type ErrorProps = {
   message: string

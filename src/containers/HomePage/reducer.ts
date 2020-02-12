@@ -5,7 +5,8 @@ export const initialStateProducts: ContainerProductsState = {
   productsData: {
     products: []
   },
-  error: false
+  error: false,
+  loading: false
 }
 
 function productsReducer(
@@ -13,8 +14,15 @@ function productsReducer(
   action: ContainerProductsActions
 ): ContainerProductsState {
   switch (action.type) {
+    case ActionTypes.GET_PRODUCTS:
+      return {
+        loading: true,
+        error: state.error,
+        productsData: state.productsData
+      }
     case ActionTypes.GET_PRODUCTS_SUCCESS:
       return {
+        loading: true,
         error: state.error,
         productsData: {
           products: action.payload.products
@@ -23,6 +31,7 @@ function productsReducer(
     case ActionTypes.GET_PRODUCTS_FAILED:
       const { ...rest } = state
       return {
+        loading: true,
         error: action.payload,
         ...rest
       }

@@ -4,16 +4,12 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 import { getProductsSuccess, getProductsFailed } from './actions'
 
-import { loaderStart, loaderEnd } from 'containers/App/actions'
-
 import { Product } from './types'
 
 import ActionTypes from './constants'
 
 function* getProductsSaga() {
   try {
-    yield put(loaderStart())
-
     const snapshot = yield call(
       reduxSagaFirebase.firestore.getCollection,
       'products'
@@ -25,10 +21,8 @@ function* getProductsSaga() {
     })
 
     yield put(getProductsSuccess(products))
-    yield put(loaderEnd())
   } catch (error) {
     yield put(getProductsFailed(error))
-    yield put(loaderEnd())
   }
 }
 

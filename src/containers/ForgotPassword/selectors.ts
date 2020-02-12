@@ -10,5 +10,7 @@ const makeSelectMessage = () =>
   createSelector(selectForgotPassword, subState => subState.message)
 const makeSelectError = () =>
   createSelector(selectForgotPassword, subState => subState.error)
+const makeSelectLoader = () =>
+  createSelector(selectForgotPassword, subState => subState.loading)
 
-export { makeSelectMessage, makeSelectError }
+export { makeSelectMessage, makeSelectError, makeSelectLoader }

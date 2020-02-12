@@ -5,19 +5,11 @@ import { home } from 'utils/routes'
 
 import { call, take, put, takeLatest, fork } from 'redux-saga/effects'
 
-import {
-  loginSuccess,
-  loginError,
-  logoutSuccess,
-  logoutError,
-  loaderStart,
-  loaderEnd
-} from './actions'
+import { loginSuccess, loginError, logoutSuccess, logoutError } from './actions'
 import ActionTypes from './constants'
 
 function* loginSaga(params: Record<string, any>) {
   try {
-    yield put(loaderStart())
     yield call(
       reduxSagaFirebase.auth.signInWithEmailAndPassword,
       params.payload.values.email,
@@ -31,32 +23,27 @@ function* loginSaga(params: Record<string, any>) {
     }
   } catch (error) {
     yield put(loginError(error))
-    yield put(loaderEnd())
   }
 }
 
 function* logoutSaga() {
   try {
-    yield put(loaderStart())
     yield call(reduxSagaFirebase.auth.signOut)
   } catch (error) {
     yield put(logoutError(error))
-    yield put(loaderEnd())
   }
 }
 
 function* loginStatusWatcher() {
   const channel = yield call(reduxSagaFirebase.auth.channel)
-  yield put(loaderStart())
+
   while (true) {
     const { user } = yield take(channel)
 
     if (user) {
       yield put(loginSuccess(user.email))
-      yield put(loaderEnd())
     } else {
       yield put(logoutSuccess())
-      yield put(loaderEnd())
     }
   }
 }

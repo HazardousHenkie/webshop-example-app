@@ -13,6 +13,3 @@ export const logout = () => action(ActionTypes.LOGOUT)
 export const logoutSuccess = () => action(ActionTypes.LOGOUT_SUCCESS)
 export const logoutError = (error: object) =>
   action(ActionTypes.LOGOUT_ERROR, error)
-
-export const loaderStart = () => action(ActionTypes.LOADER_START)
-export const loaderEnd = () => action(ActionTypes.LOADER_END)

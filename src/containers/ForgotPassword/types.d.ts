@@ -4,6 +4,7 @@ import * as actions from './actions'
 interface ForgotPasswordState {
   readonly message: string
   readonly error?: object | boolean
+  readonly loading: boolean
 }
 
 type ForgotPasswordActions = ActionType<typeof actions>

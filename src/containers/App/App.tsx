@@ -2,8 +2,6 @@ import React from 'react'
 
 import Routes from './routes'
 
-import Container from '@material-ui/core/Container'
-
 import theme from 'styles/variables'
 import { ThemeProvider } from 'styled-components'
 
@@ -17,6 +15,8 @@ import { makeSelectLoading } from 'containers/App/selectors'
 import { useInjectSaga } from 'utils/injectSaga'
 import saga from './sagas'
 
+import { AppStyled, ContainerStyled } from './styledComponents'
+
 const stateSelector = createSelector(makeSelectLoading(), loading => ({
   loading
 }))
@@ -29,13 +29,13 @@ const App: React.FC = () => {
   useInjectSaga({ key: authenticationKey, saga })
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      <AppStyled>
         {loading && <Loader />}
 
-        <Container fixed={true}>
+        <ContainerStyled fixed={true}>
           <Routes />
-        </Container>
-      </div>
+        </ContainerStyled>
+      </AppStyled>
     </ThemeProvider>
   )
 }
