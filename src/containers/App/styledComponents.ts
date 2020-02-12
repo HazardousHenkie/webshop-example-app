@@ -9,5 +9,5 @@ export const AppStyled = styled.div.attrs({
 `
 
 export const ContainerStyled = styled(Container)`
-  // height: 100%;
+  height: 100%;
 `
