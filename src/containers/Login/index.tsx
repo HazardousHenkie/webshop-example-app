@@ -2,8 +2,6 @@ import React, { useEffect, SetStateAction } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { useLocation } from 'react-router-dom'
-
 import { login } from '../App/actions'
 
 import {
@@ -14,6 +12,7 @@ import {
 
 import history from 'utils/history'
 import { home, forgotPassword } from 'utils/routes'
+import { useLocation } from 'react-router-dom'
 
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'

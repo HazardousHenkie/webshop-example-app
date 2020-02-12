@@ -16,6 +16,7 @@ function authenticationReducer(
   action: ContainerAuthenticationActions
 ): ContainerStateAuthentication {
   switch (action.type) {
+    case ActionTypes.LOGOUT:
     case ActionTypes.LOGIN:
       return {
         error: state.error,
@@ -44,7 +45,7 @@ function authenticationReducer(
         error: state.error,
         loggedIn: false,
         loading: false,
-        currentUser: state.currentUser
+        currentUser: ''
       }
     default:
       return state
