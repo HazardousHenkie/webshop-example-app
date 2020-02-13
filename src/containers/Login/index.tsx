@@ -24,9 +24,10 @@ import {
   PaperWrapper,
   StyledPaper,
   StyledTypographyTitle,
-  StyledLink,
   StyledSubmitButton
 } from 'styles/styledComponents'
+
+import { StyledLink } from './styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 
