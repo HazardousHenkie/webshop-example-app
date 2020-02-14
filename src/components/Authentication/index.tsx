@@ -30,7 +30,7 @@ const withAuthorization = <Props extends object>(
       }
     }, [loading, loggedIn, location.pathname])
 
-    return <Component {...(props as Props)} />
+    return <> {loggedIn ? <Component {...(props as Props)} /> : null}</>
   }
 
   return WithAuthorization

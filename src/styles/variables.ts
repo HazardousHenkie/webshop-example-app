@@ -1,5 +1,6 @@
 const theme = {
   black: '#000',
+  white: '#fff',
   blue: 'rgb(13, 60, 97)',
   breakpoints: {
     up: {
