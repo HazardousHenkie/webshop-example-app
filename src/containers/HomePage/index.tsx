@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      home
+      <h1>home</h1>
       <Wrapper>
         {loading && <InlineLoader />}
         {error && <InfoMessage severity="error" message={error.toString()} />}
