@@ -33,8 +33,9 @@ const App: React.FC = () => {
   const [isKnownPage, setIsKnownPage] = useState(false)
 
   useEffect(() => {
-    // @ts-ignore
-    setIsKnownPage(Object.values(routes).includes(location.pathname))
+    const knownRoutes: string[] = Object.values(routes)
+
+    setIsKnownPage(knownRoutes.includes(location.pathname))
   }, [location.pathname])
 
   useInjectSaga({ key: authenticationKey, saga })

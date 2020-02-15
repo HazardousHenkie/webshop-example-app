@@ -1,13 +1,6 @@
 import { ActionType } from 'typesafe-actions'
 import setLocation from './actions'
-import {
-  login,
-  loginSuccess,
-  loginError,
-  logout,
-  logoutSuccess,
-  logoutError
-} from './actions'
+import * as actions from './actions'
 import { ApplicationRootState } from '../../types'
 
 interface AuthenticationState {
