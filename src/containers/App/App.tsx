@@ -34,8 +34,17 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const knownRoutes: string[] = Object.values(routes)
+    const checkForSubstring = location.pathname.substring(
+      1,
+      location.pathname.lastIndexOf('/')
+    )
+    let toCheckString = location.pathname
 
-    setIsKnownPage(knownRoutes.includes(location.pathname))
+    if (checkForSubstring !== '/') {
+      toCheckString = '/' + checkForSubstring + '/'
+    }
+
+    setIsKnownPage(knownRoutes.includes(toCheckString))
   }, [location.pathname])
 
   useInjectSaga({ key: authenticationKey, saga })

@@ -8,13 +8,13 @@ import { useInjectReducer } from 'utils/injectReducer'
 
 import {
   makeSelectProductDetail,
-  makeSelectError,
-  makeSelectLoader
+  getProductDetailFailed,
+  getProductDetailsLoader
 } from './selectors'
 import reducer from './reducer'
 import saga from './saga'
 
-import { getProductDetail } from './actions'
+import { getProductDetail, getProductDetailSuccess } from './actions'
 
 import withAuthorization from 'components/Authentication'
 
@@ -23,32 +23,41 @@ import InlineLoader from 'components/Molecules/InlineLoader'
 
 import { Wrapper } from 'styles/styledComponents'
 
+import { useParams } from 'react-router-dom'
+
 const key = 'product'
 
 const stateSelector = createStructuredSelector({
   product: makeSelectProductDetail(),
-  error: makeSelectError(),
-  loading: makeSelectLoader()
+  error: getProductDetailFailed(),
+  loading: getProductDetailsLoader()
 })
 
-const HomePage: React.FC = () => {
+const ProductDetailPage: React.FC<any> = productFromRoute => {
   const { product, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
+  const { id } = useParams()
+
+  if (productFromRoute && productFromRoute.location.state) {
+    dispatch(getProductDetailSuccess(productFromRoute.location.state.product))
+  }
 
   useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
 
   useEffect(() => {
-    dispatch(getProductDetail())
-  }, [dispatch])
+    if (!product && id && !productFromRoute.location.state) {
+      dispatch(getProductDetail(id))
+    }
+  }, [product, id, productFromRoute.location.state, dispatch])
 
   return (
     <Wrapper>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
-      {product}
+      {product && product.id}
     </Wrapper>
   )
 }
 
-export default withAuthorization(HomePage)
+export default withAuthorization(ProductDetailPage)

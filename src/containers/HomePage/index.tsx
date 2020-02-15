@@ -22,6 +22,8 @@ import InfoMessage from 'components/Molecules/InfoMessage'
 import InlineLoader from 'components/Molecules/InlineLoader'
 import Product from './product'
 
+import Grid from '@material-ui/core/Grid'
+
 import { Wrapper } from 'styles/styledComponents'
 
 const key = 'products'
@@ -40,17 +42,23 @@ const HomePage: React.FC = () => {
   useInjectReducer({ key, reducer })
 
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch])
+    if (products?.length === 0) {
+      dispatch(getProducts())
+    }
+  }, [products, dispatch])
 
   return (
     <Wrapper>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
-      {!loading &&
-        !error &&
-        products &&
-        products.map(product => <Product key={product.id} product={product} />)}
+      <Grid container={true} spacing={3}>
+        {!loading &&
+          !error &&
+          products &&
+          products.map(product => (
+            <Product key={product.id} product={product} />
+          ))}
+      </Grid>
     </Wrapper>
   )
 }

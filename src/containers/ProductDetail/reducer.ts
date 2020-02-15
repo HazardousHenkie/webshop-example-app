@@ -2,12 +2,7 @@ import { ContainerProductState, ContainerProductActions } from './types'
 import ActionTypes from './constants'
 
 export const initialStateProduct: ContainerProductState = {
-  product: {
-    id: 0,
-    image: '',
-    title: '',
-    description: ''
-  },
+  product: undefined,
   error: false,
   loading: false
 }
@@ -20,21 +15,20 @@ function productReducer(
     case ActionTypes.GET_PRODUCT_DETAIL:
       return {
         loading: true,
-        error: state.error,
-        product: state.product
+        error: false,
+        product: undefined
       }
     case ActionTypes.GET_PRODUCT_DETAIL_SUCCESS:
       return {
         loading: false,
-        error: state.error,
+        error: false,
         product: action.payload.product
       }
     case ActionTypes.GET_PRODUCT_DETAIL_FAILED:
-      const { ...rest } = state
       return {
         loading: false,
         error: action.payload,
-        ...rest
+        product: undefined
       }
     default:
       return state

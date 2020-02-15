@@ -9,7 +9,7 @@ export interface Product {
 }
 
 interface ProductState {
-  readonly product: Product
+  readonly product: Product | undefined
   readonly loading: boolean
   readonly error?: object | boolean
 }

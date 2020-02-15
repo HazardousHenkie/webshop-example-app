@@ -29,6 +29,7 @@ const Product: React.FC<ProductInterface> = ({ product }) => {
         )}
         <CardContent>
           <Typography variant="body2" component="p">
+            {/* constrain description and title */}
             {product.description}
           </Typography>
         </CardContent>

@@ -14,7 +14,6 @@ function* getProductsSaga() {
       reduxSagaFirebase.firestore.getCollection,
       'products'
     )
-
     const products: Product[] = []
     snapshot.forEach((product: firebase.firestore.DocumentData) => {
       products.push({ ...product.data(), id: product.id })
