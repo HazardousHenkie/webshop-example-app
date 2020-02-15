@@ -2,7 +2,7 @@ import { action } from 'typesafe-actions'
 
 import ActionTypes from './constants'
 
-import { Product } from './types'
+import { Product } from 'containers/ProductDetail/types'
 
 export const getProducts = () => action(ActionTypes.GET_PRODUCTS)
 export const getProductsSuccess = (products: Product[]) =>

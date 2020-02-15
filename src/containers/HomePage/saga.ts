@@ -4,7 +4,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 
 import { getProductsSuccess, getProductsFailed } from './actions'
 
-import { Product } from './types'
+import { Product } from 'containers/ProductDetail/types'
 
 import ActionTypes from './constants'
 
@@ -17,7 +17,7 @@ function* getProductsSaga() {
 
     const products: Product[] = []
     snapshot.forEach((product: firebase.firestore.DocumentData) => {
-      products.push(product.data())
+      products.push({ ...product.data(), id: product.id })
     })
 
     yield put(getProductsSuccess(products))

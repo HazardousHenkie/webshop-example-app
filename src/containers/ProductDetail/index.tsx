@@ -7,50 +7,46 @@ import { useInjectSaga } from 'utils/injectSaga'
 import { useInjectReducer } from 'utils/injectReducer'
 
 import {
-  makeSelectProducts,
+  makeSelectProductDetail,
   makeSelectError,
   makeSelectLoader
 } from './selectors'
 import reducer from './reducer'
 import saga from './saga'
 
-import { getProducts } from './actions'
+import { getProductDetail } from './actions'
 
 import withAuthorization from 'components/Authentication'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 import InlineLoader from 'components/Molecules/InlineLoader'
-import Product from './product'
 
 import { Wrapper } from 'styles/styledComponents'
 
-const key = 'products'
+const key = 'product'
 
 const stateSelector = createStructuredSelector({
-  products: makeSelectProducts(),
+  product: makeSelectProductDetail(),
   error: makeSelectError(),
   loading: makeSelectLoader()
 })
 
 const HomePage: React.FC = () => {
-  const { products, error, loading } = useSelector(stateSelector)
+  const { product, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
   useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getProductDetail())
   }, [dispatch])
 
   return (
     <Wrapper>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
-      {!loading &&
-        !error &&
-        products &&
-        products.map(product => <Product key={product.id} product={product} />)}
+      {product}
     </Wrapper>
   )
 }
