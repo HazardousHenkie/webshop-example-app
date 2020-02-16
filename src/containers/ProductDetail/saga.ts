@@ -1,4 +1,5 @@
 import reduxSagaFirebase from 'utils/firebase'
+import CustomError from 'utils/customError'
 
 import { call, put, takeLatest } from 'redux-saga/effects'
 
@@ -13,16 +14,15 @@ function* getProductSaga(id: Record<string, any>) {
       `products/${id.payload}`
     )
 
-    // if not exits redirect to 404 or something? or throw error below
-    console.log(snapshot.exists)
-
     if (snapshot.exists) {
       const product = { ...snapshot.data(), id: id.payload }
 
       yield put(getProductDetailSuccess(product))
     }
+
+    const error = new CustomError('Page not found.', 404)
+    throw error
   } catch (error) {
-    console.log(error)
     yield put(getProductDetailFailed(error))
   }
 }

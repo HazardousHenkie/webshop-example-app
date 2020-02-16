@@ -3,7 +3,7 @@ import ActionTypes from './constants'
 
 export const initialStateProduct: ContainerProductState = {
   product: undefined,
-  error: false,
+  error: undefined,
   loading: false
 }
 
@@ -15,13 +15,13 @@ function productReducer(
     case ActionTypes.GET_PRODUCT_DETAIL:
       return {
         loading: true,
-        error: false,
+        error: undefined,
         product: undefined
       }
     case ActionTypes.GET_PRODUCT_DETAIL_SUCCESS:
       return {
         loading: false,
-        error: false,
+        error: undefined,
         product: action.payload.product
       }
     case ActionTypes.GET_PRODUCT_DETAIL_FAILED:

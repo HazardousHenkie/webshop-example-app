@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
 
+import ErrorPage from 'containers/Error'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -51,7 +53,9 @@ const ProductDetailPage: React.FC<any> = productFromRoute => {
     }
   }, [product, id, productFromRoute.location.state, dispatch])
 
-  return (
+  return error && error.status === 404 ? (
+    <ErrorPage errorCode={error.status} errorMessage={'Product not found.'} />
+  ) : (
     <Wrapper>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
