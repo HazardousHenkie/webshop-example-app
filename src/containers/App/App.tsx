@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { useLocation } from 'react-router-dom'
-import * as routes from 'utils/routes'
 import Routes from './routes'
 
 import theme from 'styles/variables'
@@ -29,29 +27,12 @@ const authenticationKey = 'authentication'
 
 const App: React.FC = () => {
   const { loading, loggedIn } = useSelector(stateSelector)
-  const location = useLocation()
-  const [isKnownPage, setIsKnownPage] = useState(false)
-
-  useEffect(() => {
-    const knownRoutes: string[] = Object.values(routes)
-    const checkForSubstring = location.pathname.substring(
-      1,
-      location.pathname.lastIndexOf('/')
-    )
-    let toCheckString = location.pathname
-
-    if (checkForSubstring !== '/') {
-      toCheckString = '/' + checkForSubstring + '/'
-    }
-
-    setIsKnownPage(knownRoutes.includes(toCheckString))
-  }, [location.pathname])
 
   useInjectSaga({ key: authenticationKey, saga })
   return (
     <ThemeProvider theme={theme}>
-      <AppStyled>
-        {loggedIn && isKnownPage && <MainMenu />}
+      <AppStyled loggedIn={loggedIn}>
+        {loggedIn && <MainMenu />}
 
         {loading && <Loader />}
 

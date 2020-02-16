@@ -6,6 +6,14 @@ import { notFoundError } from 'utils/strings'
 
 import { ErrorPageDiv, StyledTypographyTitle } from './styledComponents'
 
+import { useSelector } from 'react-redux'
+import { makeSelectLoggedIn } from 'containers/App/selectors'
+import { createSelector } from 'reselect'
+
+const stateSelector = createSelector(makeSelectLoggedIn(), loggedIn => ({
+  loggedIn
+}))
+
 type ErrorType = {
   errorCode: number
   errorMessage: string
@@ -15,8 +23,10 @@ const ErrorPage: React.FC<ErrorType> = ({
   errorCode = 404,
   errorMessage = notFoundError
 }) => {
+  const { loggedIn } = useSelector(stateSelector)
+
   return (
-    <ErrorPageDiv>
+    <ErrorPageDiv loggedIn={loggedIn}>
       <StyledTypographyTitle align="center" variant="h1">
         {errorCode}
       </StyledTypographyTitle>
