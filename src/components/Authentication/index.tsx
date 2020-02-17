@@ -9,6 +9,8 @@ import { useLocation } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
 
+import ErrorPage from 'containers/Error'
+
 const stateSelector = createStructuredSelector({
   loading: makeSelectLoading(),
   loggedIn: makeSelectLoggedIn()
@@ -30,7 +32,15 @@ const withAuthorization = <Props extends object>(
       }
     }, [loading, loggedIn, location.pathname])
 
-    return <> {loggedIn ? <Component {...(props as Props)} /> : null}</>
+    return (
+      <>
+        {loggedIn ? (
+          <Component {...(props as Props)} />
+        ) : (
+          <ErrorPage errorCode={401} errorMessage={'Unauthorized'} />
+        )}
+      </>
+    )
   }
 
   return WithAuthorization

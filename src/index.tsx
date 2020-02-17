@@ -6,12 +6,9 @@ import App from 'containers/App/App'
 import history from 'utils/history'
 import { ConnectedRouter } from 'connected-react-router'
 
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { ThemeProvider, StylesProvider } from '@material-ui/styles'
+import variables from 'styles/variables'
+import { ThemeProvider } from 'styled-components'
 
-import theme from 'styles/themeStyles'
-
-import GlobalStyle from 'styles/index'
 import 'typeface-roboto'
 
 import { Provider } from 'react-redux'
@@ -24,15 +21,11 @@ const store = configureStore(initialState, history)
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <GlobalStyle />
-      <CssBaseline />
-      <StylesProvider injectFirst={true}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </StylesProvider>
-    </ConnectedRouter>
+    <ThemeProvider theme={variables}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 )
