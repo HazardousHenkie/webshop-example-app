@@ -1,13 +1,7 @@
 import { ActionType } from 'typesafe-actions'
 import * as actions from './actions'
 
-// move to product page when we have it
-export interface Product {
-  product_id: number
-  image: string
-  title: string
-  description: string
-}
+import { Product } from 'containers/ProductDetail/types'
 
 interface Products {
   readonly products?: Product[]

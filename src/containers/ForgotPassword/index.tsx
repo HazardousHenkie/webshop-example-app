@@ -34,6 +34,8 @@ import {
   makeSelectLoader
 } from './selectors'
 
+import { makeSelectLoggedIn } from 'containers/App/selectors'
+
 import { loginLink } from 'utils/routes'
 
 const ForgotPasswordscheme = Yup.object().shape({
@@ -55,11 +57,12 @@ const key = 'passwordrequest'
 const stateSelector = createStructuredSelector({
   message: makeSelectMessage(),
   error: makeSelectError(),
-  loading: makeSelectLoader()
+  loading: makeSelectLoader(),
+  loggedIn: makeSelectLoggedIn()
 })
 
 const ForgotPassword: React.FC = () => {
-  const { message, error, loading } = useSelector(stateSelector)
+  const { message, error, loading, loggedIn } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
   useInjectReducer({ key, reducer })
@@ -76,7 +79,7 @@ const ForgotPassword: React.FC = () => {
   return (
     <>
       {loading && <Loader />}
-      <PaperWrapper>
+      <PaperWrapper loggedIn={loggedIn}>
         <StyledPaper variant="outlined">
           <StyledTypographyTitle align="center" variant="h1">
             Forgot password

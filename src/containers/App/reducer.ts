@@ -22,7 +22,7 @@ function authenticationReducer(
         error: state.error,
         loggedIn: false,
         loading: true,
-        currentUser: state.currentUser
+        currentUser: ''
       }
     case ActionTypes.LOGIN_SUCCESS:
       return {

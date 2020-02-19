@@ -8,6 +8,7 @@ import Loader from 'components/Molecules/Loader'
 const Home = lazy(() => import('../HomePage'))
 const Login = lazy(() => import('../Login'))
 const ForgotPassword = lazy(() => import('../ForgotPassword'))
+const ProductDetail = lazy(() => import('../ProductDetail'))
 const Error = lazy(() => import('../Error'))
 
 const Routes: React.FC = () => {
@@ -21,7 +22,11 @@ const Routes: React.FC = () => {
           component={ForgotPassword}
         />
         <Route path={routes.home} exact={true} component={Home} />
-        <Route path="/test" exact={true} component={Home} />
+        <Route
+          path={`${routes.productLink}:id`}
+          exact={true}
+          component={ProductDetail}
+        />
         <Route component={Error} />
       </Switch>
     </Suspense>

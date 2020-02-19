@@ -20,6 +20,9 @@ import withAuthorization from 'components/Authentication'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 import InlineLoader from 'components/Molecules/InlineLoader'
+import Product from './product'
+
+import Grid from '@material-ui/core/Grid'
 
 import { Wrapper } from 'styles/styledComponents'
 
@@ -39,25 +42,24 @@ const HomePage: React.FC = () => {
   useInjectReducer({ key, reducer })
 
   useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch])
+    if (products?.length === 0) {
+      dispatch(getProducts())
+    }
+  }, [products, dispatch])
 
   return (
-    <>
-      <h1>home</h1>
-      <Wrapper>
-        {loading && <InlineLoader />}
-        {error && <InfoMessage severity="error" message={error.toString()} />}
-        {!loading && !error && (
-          <ul>
-            {products &&
-              products.map(product => (
-                <li key={product.product_id}>{product.title}</li>
-              ))}
-          </ul>
-        )}
-      </Wrapper>
-    </>
+    <Wrapper>
+      {loading && <InlineLoader />}
+      {error && <InfoMessage severity="error" message={error.toString()} />}
+      <Grid container={true} spacing={3}>
+        {!loading &&
+          !error &&
+          products &&
+          products.map(product => (
+            <Product key={product.id} product={product} />
+          ))}
+      </Grid>
+    </Wrapper>
   )
 }
 

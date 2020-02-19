@@ -4,8 +4,12 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
-export const PaperWrapper = styled.div`
-  height: 100vh;
+interface LoggedInInterface {
+  loggedIn: boolean
+}
+
+export const PaperWrapper = styled.div<LoggedInInterface>`
+  height: ${props => (props.loggedIn ? 'calc(100vh - 76px)' : '100vh')};
   display: flex;
   flex-direction: column;
   justify-content: center;

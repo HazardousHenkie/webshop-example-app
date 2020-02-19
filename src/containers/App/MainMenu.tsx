@@ -37,7 +37,6 @@ const MainMenu: React.FC = () => {
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
-
             <MenuLinkStyled to={home}>home</MenuLinkStyled>
             <LogoutButton onClick={doLogout}>Logout</LogoutButton>
           </Toolbar>

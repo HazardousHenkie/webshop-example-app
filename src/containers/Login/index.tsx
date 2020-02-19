@@ -77,7 +77,7 @@ const LoginPage: React.FC = () => {
   return (
     <>
       {!loggedIn && !loading && (
-        <PaperWrapper>
+        <PaperWrapper loggedIn={loggedIn}>
           <StyledPaper variant="outlined">
             <StyledTypographyTitle align="center" variant="h1">
               Login

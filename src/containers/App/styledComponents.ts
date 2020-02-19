@@ -5,10 +5,14 @@ import AppBar from '@material-ui/core/AppBar'
 
 import { Link } from 'react-router-dom'
 
+interface LoggedInInterface {
+  loggedIn: boolean
+}
+
 export const AppStyled = styled.div.attrs({
   className: 'App'
-})`
-  height: 100%;
+})<LoggedInInterface>`
+  height: ${props => (props.loggedIn ? 'calc(100% - 76px)' : '100%')};
 `
 
 export const AppBarStyled = styled(AppBar)`
