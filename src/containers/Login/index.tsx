@@ -11,7 +11,7 @@ import {
 } from 'containers/App/selectors'
 
 import history from 'utils/history'
-import { home, forgotPassword } from 'utils/routes'
+import { HOME, FORGOT_PASSWORD } from 'utils/routes'
 import { useLocation } from 'react-router-dom'
 
 import { Formik, Form } from 'formik'
@@ -62,7 +62,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push(home)
+      history.push(HOME)
     }
   }, [loggedIn])
 
@@ -128,7 +128,9 @@ const LoginPage: React.FC = () => {
 
                   <Typography variant="body1">
                     Forgot your Password?
-                    <StyledLink to={forgotPassword}>Reset password!</StyledLink>
+                    <StyledLink to={FORGOT_PASSWORD}>
+                      Reset password!
+                    </StyledLink>
                   </Typography>
 
                   <StyledSubmitButton

@@ -1,4 +1,4 @@
-export const loginLink = '/'
-export const forgotPassword = '/forgot-password'
-export const home = '/home'
-export const productLink = '/product/'
+export const LOGIN_LINK = '/'
+export const FORGOT_PASSWORD = '/forgot-password'
+export const HOME = '/home'
+export const PRODUCT_LINK = '/product/'

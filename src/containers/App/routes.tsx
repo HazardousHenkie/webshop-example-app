@@ -15,15 +15,15 @@ const Routes: React.FC = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
-        <Route path={routes.loginLink} exact={true} component={Login} />
+        <Route path={routes.LOGIN_LINK} exact={true} component={Login} />
         <Route
-          path={routes.forgotPassword}
+          path={routes.FORGOT_PASSWORD}
           exact={true}
           component={ForgotPassword}
         />
-        <Route path={routes.home} exact={true} component={Home} />
+        <Route path={routes.HOME} exact={true} component={Home} />
         <Route
-          path={`${routes.productLink}:id`}
+          path={`${routes.PRODUCT_LINK}:id`}
           exact={true}
           component={ProductDetail}
         />
