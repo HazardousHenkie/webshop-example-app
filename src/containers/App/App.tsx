@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Routes from './routes'
 
-import theme from 'styles/variables'
-import { ThemeProvider } from 'styled-components'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import GlobalStyle from 'styles/index'
+
+import lightTheme, { darkTheme } from 'styles/themeStyles'
+
+import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 
 import { createStructuredSelector } from 'reselect'
 import { useSelector } from 'react-redux'
 
 import MainMenu from './MainMenu'
 import Loader from 'components/Molecules/Loader'
+
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
 
@@ -28,21 +34,35 @@ const authenticationKey = 'authentication'
 const App: React.FC = () => {
   const { loading, loggedIn } = useSelector(stateSelector)
 
+  const [theme, setTheme] = useState(lightTheme)
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+
+  useEffect(() => {
+    if (prefersDarkMode) {
+      setTheme(darkTheme)
+    }
+  }, [prefersDarkMode])
+
   useInjectSaga({ key: authenticationKey, saga })
   return (
-    <ThemeProvider theme={theme}>
-      <AppStyled loggedIn={loggedIn}>
-        {loggedIn && <MainMenu />}
+    <StylesProvider injectFirst={true}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <CssBaseline />
+        <AppStyled loggedIn={loggedIn}>
+          {loggedIn && <MainMenu />}
 
-        {loading && <Loader />}
+          {loading && <Loader />}
 
-        {!loading && (
-          <ContainerStyled fixed={true}>
-            <Routes />
-          </ContainerStyled>
-        )}
-      </AppStyled>
-    </ThemeProvider>
+          {!loading && (
+            <ContainerStyled fixed={true}>
+              <Routes />
+            </ContainerStyled>
+          )}
+        </AppStyled>
+      </ThemeProvider>
+    </StylesProvider>
   )
 }
 

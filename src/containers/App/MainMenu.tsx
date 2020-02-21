@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import { useDispatch } from 'react-redux'
 import { logout } from '../App/actions'
 
-import { home } from 'utils/routes'
+import { HOME } from 'utils/routes'
 
 import {
   AppBarStyled,
@@ -31,13 +31,13 @@ const MainMenu: React.FC = () => {
         <Grid item={true} xs={12}>
           <Toolbar disableGutters={true} variant="dense">
             <LogoWrapper>
-              <LogoLinkStyled to={home}>
+              <LogoLinkStyled to={HOME}>
                 <Typography variant="h6" color="inherit">
                   shop
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
-            <MenuLinkStyled to={home}>home</MenuLinkStyled>
+            <MenuLinkStyled to={HOME}>home</MenuLinkStyled>
             <LogoutButton onClick={doLogout}>Logout</LogoutButton>
           </Toolbar>
         </Grid>
