@@ -13,8 +13,11 @@ import {
 import { useLocation } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
-import { EMAIL_FIELD } from 'utils/errorStrings'
-import * as Yup from 'yup'
+import {
+  REQUIRED_FIELD,
+  EMAIL_FIELD,
+  MAX_LENGTH_FIVE_FIELD
+} from 'utils/errorStrings'
 
 import history from 'utils/history'
 import { HOME, FORGOT_PASSWORD } from 'utils/routes'
@@ -45,23 +48,13 @@ const stateSelector = createStructuredSelector({
   loggedIn: makeSelectLoggedIn()
 })
 
-const SigninSchema = Yup.object().shape({
-  email: Yup.string()
-    .required('Required')
-    .email(),
-  password: Yup.string()
-    .required('Required')
-    .min(6)
-})
-
 const LoginPage: React.FC = () => {
   const { loggedIn, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
   const location = useLocation()
   const [submitting, setSubmitting] = useState(false)
   const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
-    mode: 'onChange',
-    validationSchema: SigninSchema
+    mode: 'onChange'
   })
 
   useEffect(() => {
@@ -91,7 +84,7 @@ const LoginPage: React.FC = () => {
                 label="E-mail"
                 name="email"
                 inputRef={register({
-                  required: true,
+                  required: REQUIRED_FIELD,
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                     message: EMAIL_FIELD
@@ -109,8 +102,8 @@ const LoginPage: React.FC = () => {
                 label="Password"
                 name="password"
                 inputRef={register({
-                  required: true,
-                  minLength: 4
+                  required: REQUIRED_FIELD,
+                  minLength: { value: 5, message: MAX_LENGTH_FIVE_FIELD }
                 })}
                 helperText={errors.password && errors.password.message}
                 variant="outlined"

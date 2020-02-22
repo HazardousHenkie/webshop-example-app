@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form'
-import { EMAIL_FIELD } from 'utils/errorStrings'
+import { REQUIRED_FIELD, EMAIL_FIELD } from 'utils/errorStrings'
 
 import TextField from '@material-ui/core/TextField'
 import InfoMessage from 'components/Molecules/InfoMessage'
@@ -59,7 +59,9 @@ const ForgotPassword: React.FC = () => {
   useInjectReducer({ key, reducer })
   useInjectSaga({ key, saga })
 
-  const { register, handleSubmit, errors } = useForm<FormSubmitInterface>()
+  const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
+    mode: 'onChange'
+  })
 
   const submitForm = handleSubmit(({ email }) => {
     dispatch(sendPasswordResetEmail(email))
@@ -90,7 +92,7 @@ const ForgotPassword: React.FC = () => {
               label="E-mail"
               name="email"
               inputRef={register({
-                required: true,
+                required: REQUIRED_FIELD,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                   message: EMAIL_FIELD
