@@ -1,4 +1,4 @@
-import React, { useEffect, SetStateAction } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
@@ -10,12 +10,15 @@ import {
   makeSelectLoggedIn
 } from 'containers/App/selectors'
 
-import history from 'utils/history'
-import { HOME, FORGOT_PASSWORD } from 'utils/routes'
 import { useLocation } from 'react-router-dom'
 
-import { Formik, Form } from 'formik'
+import { useForm } from 'react-hook-form'
+import { EMAIL_FIELD } from 'utils/errorStrings'
 import * as Yup from 'yup'
+
+import history from 'utils/history'
+import { HOME, FORGOT_PASSWORD } from 'utils/routes'
+import hasSpecificErrors, { hasErrors } from 'utils/hasErrors'
 
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
@@ -31,13 +34,9 @@ import { StyledLink } from './styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 
-interface Values {
+interface FormSubmitInterface {
   email: string
   password: string
-}
-
-interface FormSubmitInterface {
-  setSubmitting: React.Dispatch<SetStateAction<boolean>>
 }
 
 const stateSelector = createStructuredSelector({
@@ -46,7 +45,7 @@ const stateSelector = createStructuredSelector({
   loggedIn: makeSelectLoggedIn()
 })
 
-const SigninScheme = Yup.object().shape({
+const SigninSchema = Yup.object().shape({
   email: Yup.string()
     .required('Required')
     .email(),
@@ -59,6 +58,11 @@ const LoginPage: React.FC = () => {
   const { loggedIn, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
   const location = useLocation()
+  const [submitting, setSubmitting] = useState(false)
+  const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
+    mode: 'onChange',
+    validationSchema: SigninSchema
+  })
 
   useEffect(() => {
     if (loggedIn) {
@@ -66,13 +70,10 @@ const LoginPage: React.FC = () => {
     }
   }, [loggedIn])
 
-  const submitForm = (
-    values: Values,
-    { setSubmitting }: FormSubmitInterface
-  ) => {
+  const submitForm = handleSubmit(values => {
     setSubmitting(false)
     dispatch(login({ url: location.search.split('?next=')[1], values }))
-  }
+  })
 
   return (
     <>
@@ -83,68 +84,56 @@ const LoginPage: React.FC = () => {
               Login
             </StyledTypographyTitle>
 
-            <Formik
-              initialValues={{ email: '', password: '' }}
-              validationSchema={SigninScheme}
-              onSubmit={submitForm}
-            >
-              {({
-                values,
-                isValid,
-                isSubmitting,
-                handleChange,
-                handleBlur,
-                errors,
-                touched
-              }) => (
-                <Form>
-                  <TextField
-                    type="email"
-                    label="E-mail"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={errors.email && touched.email && errors.email}
-                    variant="outlined"
-                    fullWidth={true}
-                    margin="normal"
-                  />
+            <form onSubmit={submitForm}>
+              <TextField
+                error={hasSpecificErrors(errors.email)}
+                type="email"
+                label="E-mail"
+                name="email"
+                inputRef={register({
+                  required: true,
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: EMAIL_FIELD
+                  }
+                })}
+                helperText={errors.email && errors.email.message}
+                variant="outlined"
+                fullWidth={true}
+                margin="normal"
+              />
 
-                  <TextField
-                    type="password"
-                    label="Password"
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={
-                      errors.password && touched.password && errors.password
-                    }
-                    variant="outlined"
-                    fullWidth={true}
-                    margin="normal"
-                  />
+              <TextField
+                error={hasSpecificErrors(errors.password)}
+                type="password"
+                label="Password"
+                name="password"
+                inputRef={register({
+                  required: true,
+                  minLength: 4
+                })}
+                helperText={errors.password && errors.password.message}
+                variant="outlined"
+                fullWidth={true}
+                margin="normal"
+              />
 
-                  <Typography variant="body1">
-                    Forgot your Password?
-                    <StyledLink to={FORGOT_PASSWORD}>
-                      Reset password!
-                    </StyledLink>
-                  </Typography>
+              <Typography variant="body1">
+                Forgot your Password?
+                <StyledLink to={FORGOT_PASSWORD}>Reset password!</StyledLink>
+              </Typography>
 
-                  <StyledSubmitButton
-                    type="submit"
-                    variant="contained"
-                    color="secondary"
-                    fullWidth={true}
-                    disabled={isSubmitting || !isValid}
-                  >
-                    Login
-                  </StyledSubmitButton>
-                </Form>
-              )}
-            </Formik>
+              <StyledSubmitButton
+                type="submit"
+                variant="contained"
+                color="secondary"
+                fullWidth={true}
+                disabled={submitting || hasErrors(errors)}
+              >
+                Login
+              </StyledSubmitButton>
+            </form>
+
             {error && (
               <InfoMessage severity="error" message={error.toString()} />
             )}
