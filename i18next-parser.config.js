@@ -2,8 +2,8 @@ module.exports = {
   createOldCatalogs: true,
   indentation: 2,
   lexers: {
-    js: ['JsxLexer'],
-    ts: ['JsxLexer'],
+    js: ['JavascriptLexer'],
+    ts: ['JavascriptLexer'],
     jsx: ['JsxLexer'],
     tsx: ['JsxLexer'],
     default: ['JsxLexer']
