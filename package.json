@@ -12,7 +12,6 @@
     "@material-ui/lab": "^4.0.0-alpha.41",
     "connected-react-router": "^6.6.1",
     "firebase": "^7.8.0",
-    "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.4",
     "invariant": "^2.2.4",
     "lodash": "^4.17.15",
@@ -37,12 +36,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "build:messages": "NODE_ENV=production babel ./src >/dev/null",
-    "trans:compile": "tsc -p . --target ES6 --module es6 --jsx preserve --outDir src/extracted",
-    "trans:extract": "babel ./src/extracted",
-    "trans:manage": "node src/translations/manageTranslations.js",
-    "trans:clean": "rm -r ./src/extracted",
-    "trans": "npm run trans:compile && npm run trans:extract && npm run trans:manage && npm run trans:clean",
+    "trans:extract": "NODE_ENV=production babel ./src/{components,containers}/**/**/*.{tsx,ts} >/dev/null",
+    "trans:manage": "node src/translations/manageTranslations.ts",
+    "trans:clean": "rm -r ./translations",
+    "trans": "npm run trans:extract && npm run trans:manage && npm run trans:clean",
     "eject": "react-scripts eject",
     "lint:staged": "lint-staged",
     "lint:eslint": "eslint --ignore-path .gitignore",
@@ -52,7 +49,7 @@
     "lint:css": "stylelint './src/**/*.{js,ts}'",
     "lint:js": "npm run lint:eslint -- . ",
     "lint:ts": "npm run lint:tslint",
-    "lint:tslint": "tslint --config ./tslint.json src/**/*.{ts,tsx} --project ./tsconfig.json --fix"
+    "lint:tslint": "tslint --config ./tslint.json ./src/**/*.{ts,tsx} --project ./tsconfig.json --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -91,6 +88,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@types/invariant": "^2.2.31",
     "@types/lodash": "^4.14.149",
     "@types/node": "^13.7.4",
@@ -104,8 +102,6 @@
     "@types/webpack-env": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
-    "babel-preset-react-app": "^9.1.1",
-    "babel-cli": "^6.26.0",
     "babel-plugin-react-intl": "^5.1.18",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",

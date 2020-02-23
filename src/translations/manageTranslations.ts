@@ -1,10 +1,10 @@
 // @ts-ignore
 const manageTranslations = require('react-intl-translations-manager').default
+// const translationLocales = require('i18n')
 
 manageTranslations({
-  messagesDirectory: 'build/messages/src/extracted/',
-  translationsDirectory: 'src/translations/locales/',
-  languages: ['jp', 'nl']
+  messagesDirectory: 'translations',
+  translationsDirectory: 'src/translations/locales',
+  languages: ['jp', 'nl'],
+  singleMessagesFile: true
 })
-
-export {}

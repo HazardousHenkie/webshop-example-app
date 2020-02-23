@@ -16,7 +16,7 @@ import 'typeface-roboto'
 import { Provider } from 'react-redux'
 import configureStore from './configureStore'
 
-// import { translationMessages } from 'i18n'
+import { translationMessages } from 'translations/i18n'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -26,11 +26,11 @@ const store = configureStore(initialState, history)
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={variables}>
-      {/* <LanguageProvider messages={translationMessages}> */}
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-      {/* </LanguageProvider> */}
+      <LanguageProvider messages={translationMessages}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </LanguageProvider>
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')

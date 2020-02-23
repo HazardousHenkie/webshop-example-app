@@ -1,0 +1,8 @@
+{
+  "Home.dayMessage": "It's a beautiful day outside.",
+  "shop.components.Molecules.LocaleToggle.en": "en",
+  "shop.components.Molecules.LocaleToggle.jp": "jp",
+  "shop.containers.App.header.logo": "Shop",
+  "shop.containers.App.mainMenu.home": "Home",
+  "shop.containers.App.mainMenu.logout": "Logout"
+}
