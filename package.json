@@ -48,7 +48,7 @@
     "lint:js": "npm run lint:eslint -- . ",
     "lint:ts": "npm run lint:tslint",
     "lint:tslint": "tslint --config ./tslint.json ./src/**/*.{ts,tsx} --project ./tsconfig.json --fix",
-    "trans:extract": "i18next --config i18next-parser.config.ts"
+    "trans:extract": "i18next --config i18next-parser.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
