@@ -5,11 +5,17 @@ import * as routes from 'utils/routes'
 
 import Loader from 'components/Molecules/Loader'
 
-const Home = lazy(() => import('../HomePage'))
-const Login = lazy(() => import('../Login'))
-const ForgotPassword = lazy(() => import('../ForgotPassword'))
-const ProductDetail = lazy(() => import('../ProductDetail'))
-const Error = lazy(() => import('../Error'))
+import Home from 'containers/HomePage'
+import Login from 'containers/Login'
+import ForgotPassword from 'containers/ForgotPassword'
+import ProductDetail from 'containers/ProductDetail'
+import Error from 'containers/Error'
+
+// const Home = lazy(() => import('../HomePage'))
+// const Login = lazy(() => import('../Login'))
+// const ForgotPassword = lazy(() => import('../ForgotPassword'))
+// const ProductDetail = lazy(() => import('../ProductDetail'))
+// const Error = lazy(() => import('../Error'))
 
 const Routes: React.FC = () => {
   return (

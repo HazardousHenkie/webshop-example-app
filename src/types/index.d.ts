@@ -9,6 +9,7 @@ import {
 } from 'containers/App/types'
 import { ContainerLoginState as LoginState } from 'containers/Login/types'
 import { ContainerForgotPasswordState as ForgotPasswordState } from 'containers/ForgotPassword/types'
+import { ContainerState as LanguageProviderState } from 'components/LanguageProvider/types'
 
 export interface InjectedStore extends Store {
   injectedReducers: any
@@ -32,6 +33,7 @@ export interface InjectSagaParams {
 
 export interface ApplicationRootState {
   readonly router: RouterState
+  readonly language: LanguageProviderState
   readonly passwordrequest: ForgotPasswordState
   readonly authentication: ContainerStateAuthentication
   readonly products: ProductsState

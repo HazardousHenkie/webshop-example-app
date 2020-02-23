@@ -5,6 +5,9 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
+import { FormattedMessage } from 'react-intl'
+import messages from './messages'
+
 import { useDispatch } from 'react-redux'
 import { logout } from '../App/actions'
 
@@ -33,12 +36,16 @@ const MainMenu: React.FC = () => {
             <LogoWrapper>
               <LogoLinkStyled to={HOME}>
                 <Typography variant="h6" color="inherit">
-                  shop
+                  <FormattedMessage {...messages.headerLogo} />
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
-            <MenuLinkStyled to={HOME}>home</MenuLinkStyled>
-            <LogoutButton onClick={doLogout}>Logout</LogoutButton>
+            <MenuLinkStyled to={HOME}>
+              <FormattedMessage {...messages.mainMenuHome} />
+            </MenuLinkStyled>
+            <LogoutButton onClick={doLogout}>
+              <FormattedMessage {...messages.mainMenuLogout} />
+            </LogoutButton>
           </Toolbar>
         </Grid>
       </Container>
