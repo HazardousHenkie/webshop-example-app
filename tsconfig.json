@@ -30,6 +30,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
+  "include": ["src", "i18next-parser.config.ts"],
   "exclude": ["node_modules"]
 }
