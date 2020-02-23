@@ -104,6 +104,8 @@
     "@types/webpack-env": "^1.15.1",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
+    "babel-preset-react-app": "^9.1.1",
+    "babel-cli": "^6.26.0",
     "babel-plugin-react-intl": "^5.1.18",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
