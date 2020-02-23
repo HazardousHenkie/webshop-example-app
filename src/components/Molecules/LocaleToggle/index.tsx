@@ -1,42 +1,34 @@
 import React from 'react'
-import { createSelector } from 'reselect'
-import { useSelector, useDispatch } from 'react-redux'
 
-import messages from './messages'
-import { appLocales } from '../../../translations/i18n'
-import { changeLocale } from 'components/LanguageProvider/actions'
-import { makeSelectLocale } from 'components/LanguageProvider/selectors'
+import { appLocales } from 'utils/i18n'
+import { useTranslation } from 'react-i18next'
 
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
 
-const stateSelector = createSelector(makeSelectLocale(), locale => ({
-  locale
-}))
+const languageScope = 'shop.components.Molecules.LocaleToggle.locale'
 
 const LocaleToggle: React.FC = () => {
-  const { locale } = useSelector(stateSelector)
-  const dispatch = useDispatch()
+  const { i18n, t } = useTranslation(languageScope)
 
   const onLocaleToggle = (
     event: React.ChangeEvent<{
       value: string
     }>
   ) => {
-    dispatch(changeLocale(event.target.value))
+    i18n.changeLanguage(event.target.value)
   }
 
   return (
     <Select
       labelId="select-language"
       id="select-language"
-      value={locale}
+      value={i18n.language}
       onChange={onLocaleToggle}
     >
       {appLocales.map(value => (
         <MenuItem key={value} value={value}>
-          {value}
-          {/* {messages[value]} */}
+          {t(`${languageScope}.${value}`, value)}
         </MenuItem>
       ))}
     </Select>

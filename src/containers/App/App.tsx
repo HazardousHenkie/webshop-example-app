@@ -22,8 +22,6 @@ import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
 import { useInjectSaga } from 'utils/injectSaga'
 import saga from './sagas'
 
-import { FormattedMessage } from 'react-intl'
-
 import { AppStyled, ContainerStyled } from './styledComponents'
 
 const stateSelector = createStructuredSelector({
@@ -59,10 +57,6 @@ const App: React.FC = () => {
 
           {!loading && (
             <ContainerStyled fixed={true}>
-              <FormattedMessage
-                id="Home.dayMessage"
-                defaultMessage="It's a beautiful day outside."
-              />
               <Routes />
             </ContainerStyled>
           )}

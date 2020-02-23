@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 
 import App from 'containers/App/App'
-
-import LanguageProvider from 'components/LanguageProvider'
 
 import history from 'utils/history'
 import { ConnectedRouter } from 'connected-react-router'
@@ -16,7 +14,7 @@ import 'typeface-roboto'
 import { Provider } from 'react-redux'
 import configureStore from './configureStore'
 
-import translationMessages from 'translations/i18n'
+import './utils/i18n'
 
 import * as serviceWorker from './serviceWorker'
 
@@ -26,11 +24,11 @@ const store = configureStore(initialState, history)
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={variables}>
-      <LanguageProvider messages={translationMessages}>
-        <ConnectedRouter history={history}>
+      <ConnectedRouter history={history}>
+        <Suspense fallback={null}>
           <App />
-        </ConnectedRouter>
-      </LanguageProvider>
+        </Suspense>
+      </ConnectedRouter>
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')

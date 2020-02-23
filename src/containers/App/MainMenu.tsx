@@ -7,8 +7,7 @@ import Grid from '@material-ui/core/Grid'
 
 import LocaleToggle from 'components/Molecules/LocaleToggle'
 
-import { FormattedMessage } from 'react-intl'
-import messages from './messages'
+import { useTranslation } from 'react-i18next'
 
 import { useDispatch } from 'react-redux'
 import { logout } from '../App/actions'
@@ -23,8 +22,11 @@ import {
   LogoutButton
 } from './styledComponents'
 
+const languageScope = 'shop.containers.App'
+
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation(languageScope)
 
   const doLogout = () => {
     dispatch(logout())
@@ -38,15 +40,15 @@ const MainMenu: React.FC = () => {
             <LogoWrapper>
               <LogoLinkStyled to={HOME}>
                 <Typography variant="h6" color="inherit">
-                  <FormattedMessage {...messages.headerLogo} />
+                  {t(`${languageScope}.header.logo`, 'Shop')}
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
             <MenuLinkStyled to={HOME}>
-              <FormattedMessage {...messages.mainMenuHome} />
+              {t(`${languageScope}.mainmenu.home`, 'Home')}
             </MenuLinkStyled>
             <LogoutButton onClick={doLogout}>
-              <FormattedMessage {...messages.mainMenuLogout} />
+              {t(`${languageScope}.mainmenu.logout`, 'Logout')}
             </LogoutButton>
 
             <LocaleToggle />

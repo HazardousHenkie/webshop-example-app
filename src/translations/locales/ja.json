@@ -1,9 +1,0 @@
-{
-  "Home.dayMessage": "外で天気がいいですよ！.",
-  "shop.components.Molecules.LocaleToggle.en": "en",
-  "shop.components.Molecules.LocaleToggle.ja": "ja",
-  "shop.components.Molecules.LocaleToggle.nl": "nl",
-  "shop.containers.App.header.logo": "ショップ",
-  "shop.containers.App.mainMenu.home": "ホーム",
-  "shop.containers.App.mainMenu.logout": "ログアウト"
-}
