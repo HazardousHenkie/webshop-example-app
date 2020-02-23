@@ -16,7 +16,7 @@ import 'typeface-roboto'
 import { Provider } from 'react-redux'
 import configureStore from './configureStore'
 
-import { translationMessages } from 'translations/i18n'
+import translationMessages from 'translations/i18n'
 
 import * as serviceWorker from './serviceWorker'
 

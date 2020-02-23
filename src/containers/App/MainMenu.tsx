@@ -5,6 +5,8 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
+import LocaleToggle from 'components/Molecules/LocaleToggle'
+
 import { FormattedMessage } from 'react-intl'
 import messages from './messages'
 
@@ -46,6 +48,8 @@ const MainMenu: React.FC = () => {
             <LogoutButton onClick={doLogout}>
               <FormattedMessage {...messages.mainMenuLogout} />
             </LogoutButton>
+
+            <LocaleToggle />
           </Toolbar>
         </Grid>
       </Container>

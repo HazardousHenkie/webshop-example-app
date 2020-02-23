@@ -6,8 +6,12 @@
         "id": "shop.components.Molecules.LocaleToggle.en"
       },
       {
-        "defaultMessage": "jp",
-        "id": "shop.components.Molecules.LocaleToggle.jp"
+        "defaultMessage": "ja",
+        "id": "shop.components.Molecules.LocaleToggle.ja"
+      },
+      {
+        "defaultMessage": "nl",
+        "id": "shop.components.Molecules.LocaleToggle.nl"
       }
     ],
     "path": "messages/src/components/Molecules/LocaleToggle/messages.json"

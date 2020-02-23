@@ -7,8 +7,12 @@ export default defineMessages({
     id: `${scope}.en`,
     defaultMessage: 'en'
   },
-  jp: {
-    id: `${scope}.jp`,
-    defaultMessage: 'jp'
+  ja: {
+    id: `${scope}.ja`,
+    defaultMessage: 'ja'
+  },
+  nl: {
+    id: `${scope}.nl`,
+    defaultMessage: 'nl'
   }
 })

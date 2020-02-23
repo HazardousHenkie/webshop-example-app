@@ -4,32 +4,43 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import messages from './messages'
 import { appLocales } from '../../../translations/i18n'
-import { changeLocale } from '../../LanguageProvider/actions'
-import { makeSelectLocale } from '../../LanguageProvider/selectors'
+import { changeLocale } from 'components/LanguageProvider/actions'
+import { makeSelectLocale } from 'components/LanguageProvider/selectors'
+
+import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
 
 const stateSelector = createSelector(makeSelectLocale(), locale => ({
   locale
 }))
 
-export default function LocaleToggle() {
+const LocaleToggle: React.FC = () => {
   const { locale } = useSelector(stateSelector)
   const dispatch = useDispatch()
 
-  const onLocaleToggle = evt => dispatch(changeLocale(evt.target.value))
+  const onLocaleToggle = (
+    event: React.ChangeEvent<{
+      value: string
+    }>
+  ) => {
+    dispatch(changeLocale(event.target.value))
+  }
 
   return (
-    <></>
-    //   <Select value={locale} onChange={onLocaleToggle}>
-
-    //  {appLocales.map(value => (
-    //     <ToggleOption key={value} value={value} message={messages[value]} />
-    //   ))}
-    // </Select>
-    // <Toggle
-    //   value={locale}
-    //   values={appLocales}
-    //   messages={messages}
-    //   onToggle={onLocaleToggle}
-    // />
+    <Select
+      labelId="select-language"
+      id="select-language"
+      value={locale}
+      onChange={onLocaleToggle}
+    >
+      {appLocales.map(value => (
+        <MenuItem key={value} value={value}>
+          {value}
+          {/* {messages[value]} */}
+        </MenuItem>
+      ))}
+    </Select>
   )
 }
+
+export default LocaleToggle
