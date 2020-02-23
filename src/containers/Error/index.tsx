@@ -2,7 +2,7 @@ import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
 
-import { NOT_FOUND_ERROR } from 'utils/errorStrings'
+import { withTranslation, WithTranslation } from 'react-i18next'
 
 import { ErrorPageDiv, StyledTypographyTitle } from './styledComponents'
 
@@ -14,14 +14,15 @@ const stateSelector = createSelector(makeSelectLoggedIn(), loggedIn => ({
   loggedIn
 }))
 
-type ErrorType = {
+interface ErrorType {
   errorCode: number
   errorMessage: string
 }
 
-const ErrorPage: React.FC<ErrorType> = ({
+const ErrorPage: React.FC<WithTranslation & ErrorType> = ({
+  t,
   errorCode = 404,
-  errorMessage = NOT_FOUND_ERROR
+  errorMessage = t('error:notFound', 'Page not found')
 }) => {
   const { loggedIn } = useSelector(stateSelector)
 
@@ -38,4 +39,4 @@ const ErrorPage: React.FC<ErrorType> = ({
   )
 }
 
-export default ErrorPage
+export default withTranslation('error')(ErrorPage)

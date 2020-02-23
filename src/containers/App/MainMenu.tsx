@@ -22,11 +22,9 @@ import {
   LogoutButton
 } from './styledComponents'
 
-const languageScope = 'shop.containers.App'
-
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch()
-  const { t } = useTranslation(languageScope)
+  const { t } = useTranslation(['header', 'mainMenu'])
 
   const doLogout = () => {
     dispatch(logout())
@@ -40,15 +38,15 @@ const MainMenu: React.FC = () => {
             <LogoWrapper>
               <LogoLinkStyled to={HOME}>
                 <Typography variant="h6" color="inherit">
-                  {t(`${languageScope}.header.logo`, 'Shop')}
+                  {t('header:logo', 'Shop')}
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
             <MenuLinkStyled to={HOME}>
-              {t(`${languageScope}.mainmenu.home`, 'Home')}
+              {t('mainMenu:item.home', 'Home')}
             </MenuLinkStyled>
             <LogoutButton onClick={doLogout}>
-              {t(`${languageScope}.mainmenu.logout`, 'Logout')}
+              {t('mainMenu:item.logout', 'Logout')}
             </LogoutButton>
 
             <LocaleToggle />

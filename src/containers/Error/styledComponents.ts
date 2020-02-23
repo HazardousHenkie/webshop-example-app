@@ -12,7 +12,7 @@ export const StyledTypographyTitle = styled(Typography)`
 `
 
 export const ErrorPageDiv = styled.div<LoggedInInterface>`
-  height: ${props => (props.loggedIn ? 'calc(100vh - 76px)' : '100%vh')};
+  height: ${props => (props.loggedIn ? 'calc(100vh - 76px)' : '100vh')};
   display: flex;
   flex-direction: column;
   justify-content: center;

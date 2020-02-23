@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select'
 const languageScope = 'shop.components.Molecules.LocaleToggle.locale'
 
 const LocaleToggle: React.FC = () => {
-  const { i18n, t } = useTranslation(languageScope)
+  const { i18n } = useTranslation(languageScope)
 
   const onLocaleToggle = (
     event: React.ChangeEvent<{
@@ -28,7 +28,7 @@ const LocaleToggle: React.FC = () => {
     >
       {appLocales.map(value => (
         <MenuItem key={value} value={value}>
-          {t(`${languageScope}.${value}`, value)}
+          {value}
         </MenuItem>
       ))}
     </Select>
