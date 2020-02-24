@@ -5,12 +5,10 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
-import LocaleToggle from 'components/Molecules/LocaleToggle'
-
 import { useTranslation } from 'react-i18next'
 
 import { useDispatch } from 'react-redux'
-import { logout } from '../App/actions'
+import { logout } from './actions'
 
 import { HOME } from 'utils/routes'
 
@@ -48,8 +46,6 @@ const MainMenu: React.FC = () => {
             <LogoutButton onClick={doLogout}>
               {t('mainMenu:item.logout', 'Logout')}
             </LogoutButton>
-
-            <LocaleToggle />
           </Toolbar>
         </Grid>
       </Container>
