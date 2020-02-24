@@ -13,7 +13,7 @@ export const AppStyled = styled.div.attrs({
   className: 'App'
 })<LoggedInInterface>`
   height: ${props =>
-    props.loggedIn ? 'calc(100% - 138px)' : 'calc(100% - 62px)'};
+    props.loggedIn ? 'calc(100% - 148px)' : 'calc(100% - 72px)'};
 `
 
 export const AppBarStyled = styled(AppBar)`
@@ -53,7 +53,7 @@ export const LogoutButton = styled.button`
   color: ${props => props.theme.white};
 `
 export const FooterStyled = styled.footer`
-  margin: 20px 10px 10px;
+  margin: 20px;
   display: flex;
   justify-content: flex-end;
 `

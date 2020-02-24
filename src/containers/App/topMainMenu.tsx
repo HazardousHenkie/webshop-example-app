@@ -5,6 +5,8 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
+import ThemeSwitcher from 'containers/ThemeSwitcher'
+
 import { useTranslation } from 'react-i18next'
 
 import { useDispatch } from 'react-redux'
@@ -40,6 +42,7 @@ const MainMenu: React.FC = () => {
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
+            <ThemeSwitcher />
             <MenuLinkStyled to={HOME}>
               {t('mainMenu:item.home', 'Home')}
             </MenuLinkStyled>

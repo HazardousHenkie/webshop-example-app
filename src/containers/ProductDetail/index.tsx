@@ -35,7 +35,7 @@ const stateSelector = createStructuredSelector({
   loading: getProductDetailsLoader()
 })
 
-const ProductDetailPage: React.FC<any> = productFromRoute => {
+const ProductDetailPage: React.FC<Record<string, any>> = productFromRoute => {
   const { product, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
   const { id } = useParams()

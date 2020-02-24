@@ -10,7 +10,7 @@ interface LoggedInInterface {
 
 export const PaperWrapper = styled.div<LoggedInInterface>`
   height: ${props =>
-    props.loggedIn ? 'calc(100vh - 138px)' : 'calc(100vh - 62px)'};
+    props.loggedIn ? 'calc(100vh - 148px)' : 'calc(100vh - 72px)'};
   display: flex;
   flex-direction: column;
   justify-content: center;

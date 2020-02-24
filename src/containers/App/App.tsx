@@ -16,9 +16,8 @@ import MainMenu from './topMainMenu'
 import Footer from './footer'
 import Loader from 'components/Molecules/Loader'
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-
 import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
+import { makeSelectDarkMode } from 'containers/ThemeSwitcher/selectors'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import saga from './sagas'
@@ -27,25 +26,27 @@ import { AppStyled, ContainerStyled } from './styledComponents'
 
 const stateSelector = createStructuredSelector({
   loading: makeSelectLoading(),
-  loggedIn: makeSelectLoggedIn()
+  loggedIn: makeSelectLoggedIn(),
+  darkMode: makeSelectDarkMode()
 })
 
 const authenticationKey = 'authentication'
 
 const App: React.FC = () => {
-  const { loading, loggedIn } = useSelector(stateSelector)
+  const { loading, loggedIn, darkMode } = useSelector(stateSelector)
 
   const [theme, setTheme] = useState(lightTheme)
 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
   useEffect(() => {
-    if (prefersDarkMode) {
+    if (darkMode) {
       setTheme(darkTheme)
+    } else {
+      setTheme(lightTheme)
     }
-  }, [prefersDarkMode])
+  }, [darkMode])
 
   useInjectSaga({ key: authenticationKey, saga })
+
   return (
     <StylesProvider injectFirst={true}>
       <ThemeProvider theme={theme}>
