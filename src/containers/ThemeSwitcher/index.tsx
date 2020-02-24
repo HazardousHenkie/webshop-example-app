@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Switch from '@material-ui/core/Switch'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,30 +13,22 @@ import reducer from './reducer'
 
 import { switchTheme } from './actions'
 
+import { useCookies } from 'react-cookie'
+
 const key = 'themeSwitcher'
 
 const stateSelector = createSelector(makeSelectDarkMode(), darkMode => ({
   darkMode
 }))
 
-const ProductDetailPage: React.FC = () => {
-  const [localstorageDarkMode, setLocalstoragedarkMode] = React.useState(false)
+const ThemeSwitcher: React.FC = () => {
   const { darkMode } = useSelector(stateSelector)
   const dispatch = useDispatch()
-
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
-  useEffect(() => {
-    dispatch(switchTheme(prefersDarkMode))
-  }, [dispatch, prefersDarkMode])
-
-  useEffect(() => {
-    dispatch(switchTheme(localstorageDarkMode))
-    localStorage.setItem('darkMode', localstorageDarkMode)
-  }, [localstorageDarkMode])
+  const [cookies, setCookie] = useCookies(['darkMode'])
 
   const handleChange = () => {
-    setLocalstoragedarkMode(!darkMode)
+    setCookie('darkMode', !darkMode)
+    dispatch(switchTheme(!darkMode))
   }
 
   useInjectReducer({ key, reducer })
@@ -52,4 +43,4 @@ const ProductDetailPage: React.FC = () => {
   )
 }
 
-export default ProductDetailPage
+export default ThemeSwitcher
