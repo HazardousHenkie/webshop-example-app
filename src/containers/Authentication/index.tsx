@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import history from 'utils/history'
-import { LOGIN_LINK } from 'utils/routes'
+import { LOGIN_LINK } from 'strings/routes'
 import { useLocation } from 'react-router-dom'
 
 import { createStructuredSelector } from 'reselect'

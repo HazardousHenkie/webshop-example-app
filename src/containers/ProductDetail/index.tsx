@@ -21,7 +21,7 @@ import { getProductDetail, getProductDetailSuccess } from './actions'
 import withAuthorization from 'containers/Authentication'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
-import InlineLoader from 'components/Molecules/InlineLoader'
+import InlineLoader from 'components/Atoms/InlineLoader'
 
 import { Wrapper } from 'styles/styledComponents'
 

@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import history from 'utils/history'
-import { HOME, FORGOT_PASSWORD } from 'utils/routes'
+import { HOME, FORGOT_PASSWORD } from 'strings/routes'
 import hasSpecificErrors, { hasErrors } from 'utils/hasErrors'
 
 import TextField from '@material-ui/core/TextField'

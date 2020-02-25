@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import MainMenu from './topMainMenu'
 import Footer from './footer'
-import Loader from 'components/Molecules/Loader'
+import Loader from 'components/Atoms/Loader'
 
 import { makeSelectLoading, makeSelectLoggedIn } from 'containers/App/selectors'
 import { makeSelectDarkMode } from 'containers/ThemeSwitcher/selectors'

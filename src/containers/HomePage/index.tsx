@@ -19,7 +19,7 @@ import { getProducts } from './actions'
 import withAuthorization from 'containers/Authentication'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
-import InlineLoader from 'components/Molecules/InlineLoader'
+import InlineLoader from 'components/Atoms/InlineLoader'
 import Product from './product'
 
 import Grid from '@material-ui/core/Grid'

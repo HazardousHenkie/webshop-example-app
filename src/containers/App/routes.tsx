@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import * as routes from 'utils/routes'
+import * as routes from 'strings/routes'
 
-import Loader from 'components/Molecules/Loader'
+import Loader from 'components/Atoms/Loader'
 
 const Home = lazy(() => import('../HomePage'))
 const Login = lazy(() => import('../Login'))

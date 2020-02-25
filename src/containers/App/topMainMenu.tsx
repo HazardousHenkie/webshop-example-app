@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { logout } from './actions'
 
-import { HOME } from 'utils/routes'
+import { HOME } from 'strings/routes'
 
 import {
   AppBarStyled,
