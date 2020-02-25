@@ -45,27 +45,14 @@ const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   useEffect(() => {
-    dispatch(switchTheme(true))
     if (cookies.darkMode !== undefined) {
       const cookieResult =
         cookies.darkMode.toLowerCase() === 'true' ? true : false
-
-      if (cookieResult) {
-        setTheme(darkTheme)
-      } else {
-        setTheme(lightTheme)
-      }
-
       dispatch(switchTheme(cookieResult))
     } else {
-      if (prefersDarkMode) {
-        setTheme(darkTheme)
-      } else {
-        setTheme(lightTheme)
-      }
       dispatch(switchTheme(prefersDarkMode))
     }
-  }, [cookies.darkMode, dispatch, prefersDarkMode])
+  })
 
   useEffect(() => {
     if (darkMode) {

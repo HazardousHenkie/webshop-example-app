@@ -5,17 +5,11 @@ import Switch from '@material-ui/core/Switch'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
-import { useInjectReducer } from 'utils/injectReducer'
-
 import { makeSelectDarkMode } from './selectors'
-
-import reducer from './reducer'
 
 import { switchTheme } from './actions'
 
 import { useCookies } from 'react-cookie'
-
-const key = 'themeSwitcher'
 
 const stateSelector = createSelector(makeSelectDarkMode(), darkMode => ({
   darkMode
@@ -24,14 +18,14 @@ const stateSelector = createSelector(makeSelectDarkMode(), darkMode => ({
 const ThemeSwitcher: React.FC = () => {
   const { darkMode } = useSelector(stateSelector)
   const dispatch = useDispatch()
+  // usecookies doesn't allow to have just setCookies so we need to have cookies in there even if we don't use it
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie] = useCookies(['darkMode'])
 
   const handleChange = () => {
     setCookie('darkMode', !darkMode)
     dispatch(switchTheme(!darkMode))
   }
-
-  useInjectReducer({ key, reducer })
 
   return (
     <Switch
