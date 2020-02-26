@@ -2,7 +2,7 @@ import React from 'react'
 
 import Typography from '@material-ui/core/Typography'
 
-import { notFoundError } from 'utils/strings'
+import { NOT_FOUND_ERROR } from 'utils/errorStrings'
 
 import { ErrorPageDiv, StyledTypographyTitle } from './styledComponents'
 
@@ -21,7 +21,7 @@ type ErrorType = {
 
 const ErrorPage: React.FC<ErrorType> = ({
   errorCode = 404,
-  errorMessage = notFoundError
+  errorMessage = NOT_FOUND_ERROR
 }) => {
   const { loggedIn } = useSelector(stateSelector)
 

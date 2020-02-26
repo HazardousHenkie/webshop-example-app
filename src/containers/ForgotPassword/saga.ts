@@ -14,7 +14,7 @@ function* sendPasswordResetEmailSaga(params: Record<string, any>) {
     yield call(
       // @ts-ignore
       reduxSagaFirebase.auth.sendPasswordResetEmail,
-      params.payload.email
+      params.payload
     )
     yield put(sendPasswordResetEmailSuccess())
   } catch (error) {
