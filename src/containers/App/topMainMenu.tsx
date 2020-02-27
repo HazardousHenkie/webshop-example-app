@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { logout } from './actions'
 
-import { HOME } from 'strings/routes'
+import ROUTES from 'strings/routes'
 
 import {
   AppBarStyled,
@@ -36,14 +36,14 @@ const MainMenu: React.FC = () => {
         <Grid item={true} xs={12}>
           <Toolbar disableGutters={true} variant="dense">
             <LogoWrapper>
-              <LogoLinkStyled to={HOME}>
+              <LogoLinkStyled to={ROUTES.HOME}>
                 <Typography variant="h6" color="inherit">
                   {t('header:logo', 'Shop')}
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
             <ThemeSwitcher />
-            <MenuLinkStyled to={HOME}>
+            <MenuLinkStyled to={ROUTES.HOME}>
               {t('mainMenu:item.home', 'Home')}
             </MenuLinkStyled>
             <LogoutButton onClick={doLogout}>

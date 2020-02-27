@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import history from 'utils/history'
-import { LOGIN_LINK } from 'strings/routes'
+import ROUTES from 'strings/routes'
 import { useLocation } from 'react-router-dom'
 
 import { createStructuredSelector } from 'reselect'
@@ -26,7 +26,7 @@ const withAuthorization = <Props extends object>(
     useEffect(() => {
       if (!loading && !loggedIn) {
         history.push({
-          pathname: LOGIN_LINK,
+          pathname: ROUTES.LOGIN_LINK,
           search: `?next=${location.pathname}`
         })
       }

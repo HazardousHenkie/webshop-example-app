@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PRODUCT_LINK } from 'utils/routes'
+import { PRODUCT_LINK } from 'strings/routes'
 import { Link } from 'react-router-dom'
 
 import Grid from '@material-ui/core/Grid'

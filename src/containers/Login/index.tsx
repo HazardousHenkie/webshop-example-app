@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
 import history from 'utils/history'
-import { HOME, FORGOT_PASSWORD } from 'strings/routes'
+import ROUTES from 'strings/routes'
 import hasSpecificErrors, { hasErrors } from 'utils/hasErrors'
 
 import TextField from '@material-ui/core/TextField'
@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (loggedIn) {
-      history.push(HOME)
+      history.push(ROUTES.HOME)
     }
   }, [loggedIn])
 
@@ -124,7 +124,9 @@ const LoginPage: React.FC = () => {
 
               <Typography variant="body1">
                 Forgot your Password?
-                <StyledLink to={FORGOT_PASSWORD}>Reset password!</StyledLink>
+                <StyledLink to={ROUTES.FORGOT_PASSWORD}>
+                  Reset password!
+                </StyledLink>
               </Typography>
 
               <StyledSubmitButton

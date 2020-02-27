@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### use nvm
+
+nvm install v12.16.0
+nvm use
+
+after
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />
