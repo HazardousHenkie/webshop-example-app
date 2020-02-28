@@ -16,7 +16,7 @@ import saga from './saga'
 
 import { getProducts } from './actions'
 
-import withAuthorization from 'components/Authentication'
+import withAuthorization from 'containers/Authentication'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 import InlineLoader from 'components/Molecules/InlineLoader'

@@ -1,0 +1,6 @@
+{
+  "notFound": "Pagina niet gevonden",
+  "requiredField": "Verplicht veld.",
+  "unvalidEmail": "Vul een e-mail adres in.",
+  "maxLengthFive": "De minimale lengte is 5."
+}

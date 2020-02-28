@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useForm } from 'react-hook-form'
-import { REQUIRED_FIELD, EMAIL_FIELD } from 'utils/errorStrings'
 
 import TextField from '@material-ui/core/TextField'
 import InfoMessage from 'components/Molecules/InfoMessage'
@@ -34,6 +33,8 @@ import {
   makeSelectLoader
 } from './selectors'
 
+import { useTranslation } from 'react-i18next'
+
 import { makeSelectLoggedIn } from 'containers/App/selectors'
 
 import { LOGIN_LINK } from 'utils/routes'
@@ -62,6 +63,8 @@ const ForgotPassword: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
     mode: 'onChange'
   })
+
+  const { t } = useTranslation('error')
 
   const submitForm = handleSubmit(({ email }) => {
     dispatch(sendPasswordResetEmail(email))
@@ -92,10 +95,13 @@ const ForgotPassword: React.FC = () => {
               label="E-mail"
               name="email"
               inputRef={register({
-                required: REQUIRED_FIELD,
+                required: t(
+                  'error:requiredField',
+                  'Input is required.'
+                ) as string,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: EMAIL_FIELD
+                  message: t('error:unvalidEmail', 'Must be  vld email.')
                 }
               })}
               helperText={errors.email && errors.email.message}

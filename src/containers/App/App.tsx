@@ -12,7 +12,8 @@ import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 import { createStructuredSelector } from 'reselect'
 import { useSelector } from 'react-redux'
 
-import MainMenu from './MainMenu'
+import MainMenu from './topMainMenu'
+import Footer from './footer'
 import Loader from 'components/Molecules/Loader'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -60,6 +61,8 @@ const App: React.FC = () => {
               <Routes />
             </ContainerStyled>
           )}
+
+          <Footer />
         </AppStyled>
       </ThemeProvider>
     </StylesProvider>

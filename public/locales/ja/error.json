@@ -1,0 +1,6 @@
+{
+  "notFound": "ページ見つけられませんでした。",
+  "requiredField": "入力が必要です。",
+  "unvalidEmail": "有効なメールである必要があります。",
+  "maxLengthFive": "このフィールドの最小幅は5です。"
+}

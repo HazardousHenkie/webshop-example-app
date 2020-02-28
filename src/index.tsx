@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 
 import App from 'containers/App/App'
@@ -14,6 +14,8 @@ import 'typeface-roboto'
 import { Provider } from 'react-redux'
 import configureStore from './configureStore'
 
+import './utils/i18n'
+
 import * as serviceWorker from './serviceWorker'
 
 const initialState = {}
@@ -23,7 +25,9 @@ ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={variables}>
       <ConnectedRouter history={history}>
-        <App />
+        <Suspense fallback={null}>
+          <App />
+        </Suspense>
       </ConnectedRouter>
     </ThemeProvider>
   </Provider>,

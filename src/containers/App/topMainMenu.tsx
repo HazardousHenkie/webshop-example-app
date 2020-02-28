@@ -5,8 +5,10 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
+import { useTranslation } from 'react-i18next'
+
 import { useDispatch } from 'react-redux'
-import { logout } from '../App/actions'
+import { logout } from './actions'
 
 import { HOME } from 'utils/routes'
 
@@ -20,6 +22,7 @@ import {
 
 const MainMenu: React.FC = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation(['header', 'mainMenu'])
 
   const doLogout = () => {
     dispatch(logout())
@@ -33,12 +36,16 @@ const MainMenu: React.FC = () => {
             <LogoWrapper>
               <LogoLinkStyled to={HOME}>
                 <Typography variant="h6" color="inherit">
-                  shop
+                  {t('header:logo', 'Shop')}
                 </Typography>
               </LogoLinkStyled>
             </LogoWrapper>
-            <MenuLinkStyled to={HOME}>home</MenuLinkStyled>
-            <LogoutButton onClick={doLogout}>Logout</LogoutButton>
+            <MenuLinkStyled to={HOME}>
+              {t('mainMenu:item.home', 'Home')}
+            </MenuLinkStyled>
+            <LogoutButton onClick={doLogout}>
+              {t('mainMenu:item.logout', 'Logout')}
+            </LogoutButton>
           </Toolbar>
         </Grid>
       </Container>

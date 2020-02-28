@@ -13,11 +13,6 @@ import {
 import { useLocation } from 'react-router-dom'
 
 import { useForm } from 'react-hook-form'
-import {
-  REQUIRED_FIELD,
-  EMAIL_FIELD,
-  MAX_LENGTH_FIVE_FIELD
-} from 'utils/errorStrings'
 
 import history from 'utils/history'
 import { HOME, FORGOT_PASSWORD } from 'utils/routes'
@@ -36,6 +31,8 @@ import {
 import { StyledLink } from './styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
+
+import { useTranslation } from 'react-i18next'
 
 interface FormSubmitInterface {
   email: string
@@ -56,6 +53,8 @@ const LoginPage: React.FC = () => {
   const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
     mode: 'onChange'
   })
+
+  const { t } = useTranslation('error')
 
   useEffect(() => {
     if (loggedIn) {
@@ -84,10 +83,13 @@ const LoginPage: React.FC = () => {
                 label="E-mail"
                 name="email"
                 inputRef={register({
-                  required: REQUIRED_FIELD,
+                  required: t(
+                    'error:requiredField',
+                    'Input is required.'
+                  ) as string,
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    message: EMAIL_FIELD
+                    message: t('error:unvalidEmail', 'Must be a vald email.')
                   }
                 })}
                 helperText={errors.email && errors.email.message}
@@ -102,8 +104,17 @@ const LoginPage: React.FC = () => {
                 label="Password"
                 name="password"
                 inputRef={register({
-                  required: REQUIRED_FIELD,
-                  minLength: { value: 5, message: MAX_LENGTH_FIVE_FIELD }
+                  required: t(
+                    'error:requiredField',
+                    'Input is required.'
+                  ) as string,
+                  minLength: {
+                    value: 5,
+                    message: t(
+                      'error:maxLengthFive',
+                      'The minimum width of this field is 5.'
+                    )
+                  }
                 })}
                 helperText={errors.password && errors.password.message}
                 variant="outlined"
