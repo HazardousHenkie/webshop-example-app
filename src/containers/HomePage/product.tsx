@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PRODUCT_LINK } from 'strings/routes'
+import ROUTES from 'strings/routes'
 import { Link } from 'react-router-dom'
 
 import Grid from '@material-ui/core/Grid'
@@ -37,7 +37,7 @@ const Product: React.FC<ProductInterface> = ({ product }) => {
           <IconButtonStyled
             component={Link}
             to={{
-              pathname: `${PRODUCT_LINK}${product.id}`,
+              pathname: `${ROUTES.PRODUCT_LINK}${product.id}`,
               state: {
                 product
               }
