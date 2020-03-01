@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography'
 import InfoIcon from '@material-ui/icons/Info'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
+import { useTranslation } from 'react-i18next'
+
 import { CardMediaStyled, IconButtonStyled } from './styledComponents'
 
 interface ProductInterface {
@@ -20,6 +22,8 @@ interface ProductInterface {
 }
 
 const Product: React.FC<ProductInterface> = ({ product }) => {
+  const { t } = useTranslation(['homePage'])
+
   return (
     <Grid item={true} xs={4}>
       <Card>
@@ -29,8 +33,7 @@ const Product: React.FC<ProductInterface> = ({ product }) => {
         )}
         <CardContent>
           <Typography variant="body2" component="p">
-            {/* constrain description and title */}
-            {product.description}
+            {product.short_description}
           </Typography>
         </CardContent>
         <CardActions disableSpacing={true}>
@@ -42,11 +45,16 @@ const Product: React.FC<ProductInterface> = ({ product }) => {
                 product
               }
             }}
-            aria-label="more information"
+            aria-label={t('forgotPassword:moreInfo', 'more information')}
           >
             <InfoIcon />
           </IconButtonStyled>
-          <IconButton aria-label="add to shopping cart">
+          <IconButton
+            aria-label={t(
+              'forgotPassword:addToShoppingCart',
+              'add to shopping cart'
+            )}
+          >
             <ShoppingCartIcon />
           </IconButton>
         </CardActions>

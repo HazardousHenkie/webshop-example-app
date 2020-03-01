@@ -33,6 +33,7 @@ import { StyledLink } from './styledComponents'
 import InfoMessage from 'components/Molecules/InfoMessage'
 
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 interface FormSubmitInterface {
   email: string
@@ -54,7 +55,7 @@ const LoginPage: React.FC = () => {
     mode: 'onChange'
   })
 
-  const { t } = useTranslation('error')
+  const { t } = useTranslation(['error', 'login'])
 
   useEffect(() => {
     if (loggedIn) {
@@ -69,6 +70,17 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{t('login:title', 'Login Page')}</title>
+        <meta
+          name={t('login:title', 'Login Page')}
+          content={t(
+            'login:description',
+            'A simple shop with react application login page'
+          )}
+        />
+      </Helmet>
+
       {!loggedIn && !loading && (
         <PaperWrapper loggedIn={loggedIn}>
           <StyledPaper variant="outlined">
@@ -80,7 +92,7 @@ const LoginPage: React.FC = () => {
               <TextField
                 error={hasSpecificErrors(errors.email)}
                 type="email"
-                label="E-mail"
+                label={t('login:email', 'E-mail')}
                 name="email"
                 inputRef={register({
                   required: t(
@@ -101,7 +113,7 @@ const LoginPage: React.FC = () => {
               <TextField
                 error={hasSpecificErrors(errors.password)}
                 type="password"
-                label="Password"
+                label={t('login:password', 'Password')}
                 name="password"
                 inputRef={register({
                   required: t(
@@ -123,9 +135,9 @@ const LoginPage: React.FC = () => {
               />
 
               <Typography variant="body1">
-                Forgot your Password?
+                {t('login:forgotPassword', 'Forgot your Password?')}
                 <StyledLink to={ROUTES.FORGOT_PASSWORD}>
-                  Reset password!
+                  {t('login:resetPassword', 'Reset password!')}
                 </StyledLink>
               </Typography>
 
@@ -136,7 +148,7 @@ const LoginPage: React.FC = () => {
                 fullWidth={true}
                 disabled={submitting || hasErrors(errors)}
               >
-                Login
+                {t('login:Login', 'Login')}
               </StyledSubmitButton>
             </form>
 

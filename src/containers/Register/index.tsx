@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, createRef, RefObject } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -18,7 +18,7 @@ import Loader from 'components/Atoms/Loader'
 
 import { createStructuredSelector } from 'reselect'
 
-import { sendPasswordResetEmail } from './actions'
+import { registerAction } from './actions'
 
 import hasSpecificErrors, { hasErrors } from 'utils/hasErrors'
 import { useInjectSaga } from 'utils/injectSaga'
@@ -46,9 +46,9 @@ interface FormSubmitInterface {
   email: string
 }
 
-const key = 'passwordrequest'
+const key = 'register'
 
-const recaptchaRef = React.createRef() as React.RefObject<any>
+const recaptchaRef = createRef() as RefObject<any>
 
 const stateSelector = createStructuredSelector({
   message: makeSelectMessage(),
@@ -57,7 +57,7 @@ const stateSelector = createStructuredSelector({
   loggedIn: makeSelectLoggedIn()
 })
 
-const ForgotPassword: React.FC = () => {
+const Register: React.FC = () => {
   const { message, error, loading, loggedIn } = useSelector(stateSelector)
   const [submitting, setSubmitting] = useState(false)
   const [recaptchaError, setRecaptchaError] = useState(false)
@@ -70,7 +70,7 @@ const ForgotPassword: React.FC = () => {
     mode: 'onChange'
   })
 
-  const { t } = useTranslation(['error', 'forgotPassword'])
+  const { t } = useTranslation(['error', 'register'])
 
   const submitForm = handleSubmit(({ email }) => {
     recaptchaRef.current.execute()
@@ -81,7 +81,7 @@ const ForgotPassword: React.FC = () => {
     }
 
     if (recaptchaValue !== '') {
-      dispatch(sendPasswordResetEmail(email))
+      dispatch(registerAction(email))
     } else {
       setRecaptchaError(true)
     }
@@ -92,12 +92,12 @@ const ForgotPassword: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>{t('forgotPassword:title', 'Forgot Password Page')}</title>
+        <title>{t('register:title', 'Register Page')}</title>
         <meta
-          name={t('forgotPassword:title', 'Forgot Password Page')}
+          name={t('register:title', 'Register Page')}
           content={t(
-            'forgotPassword:description',
-            'A simple shop with react application forgot password page'
+            'register:description',
+            'A simple shop with react application register page'
           )}
         />
       </Helmet>
@@ -106,13 +106,13 @@ const ForgotPassword: React.FC = () => {
       <PaperWrapper loggedIn={loggedIn}>
         <StyledPaper variant="outlined">
           <StyledTypographyTitle align="center" variant="h1">
-            {t('forgotPassword:typographyTitle', ' Forgot password')}
+            {t('register:typographyTitle', 'Register')}
           </StyledTypographyTitle>
           {message && (
             <InfoMessage
               severity="info"
               message={t(
-                'forgotPassword:succesMessage',
+                'register:succesMessage',
                 ' an email with instructions has been send.'
               )}
               link={ROUTES.LOGIN_LINK}
@@ -123,7 +123,7 @@ const ForgotPassword: React.FC = () => {
             <TextField
               error={hasSpecificErrors(errors.email)}
               type="email"
-              label={t('forgotPassword:emailLabel', 'E-mail')}
+              label={t('register:emailLabel', 'E-mail')}
               name="email"
               inputRef={register({
                 required: t(
@@ -154,7 +154,7 @@ const ForgotPassword: React.FC = () => {
               fullWidth={true}
               disabled={submitting || hasErrors(errors)}
             >
-              {t('forgotPassword:resetButton', 'Reset password')}
+              {t('register:resetButton', 'Register')}
             </StyledSubmitButton>
           </form>
 
@@ -162,7 +162,7 @@ const ForgotPassword: React.FC = () => {
           {recaptchaError && (
             <InfoMessage
               severity="error"
-              message={t('forgotPassword:captcha', "Recaptcha wasn't valid.")}
+              message={t('register:captcha', "Recaptcha wasn't valid.")}
             />
           )}
         </StyledPaper>
@@ -171,4 +171,4 @@ const ForgotPassword: React.FC = () => {
   )
 }
 
-export default ForgotPassword
+export default Register

@@ -25,6 +25,7 @@ import { makeSelectDarkMode } from 'containers/ThemeSwitcher/selectors'
 import { switchTheme } from 'containers/ThemeSwitcher/actions'
 
 import { useCookies } from 'react-cookie'
+import { useTranslation } from 'react-i18next'
 
 import { useInjectSaga } from 'utils/injectSaga'
 import saga from './sagas'
@@ -45,6 +46,7 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState(lightTheme)
   const [cookies] = useCookies(['darkMode'])
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const { t } = useTranslation('app')
 
   useEffect(() => {
     if (cookies.darkMode !== undefined) {
@@ -73,10 +75,13 @@ const App: React.FC = () => {
         <CssBaseline />
         <AppStyled loggedIn={loggedIn}>
           <Helmet
-            titleTemplate="%s - React shop example"
-            defaultTitle="React shop example"
+            titleTemplate={t('app:titleTemplate', '%s - React shop example')}
+            defaultTitle={t('app:defaultTitle', 'React shop example')}
           >
-            <meta name="description" content="A React shop example" />
+            <meta
+              name="description"
+              content={t('app:descriptionTitle', 'A React shop example')}
+            />
           </Helmet>
 
           {loggedIn && <MainMenu />}

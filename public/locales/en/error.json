@@ -1,5 +1,7 @@
 {
   "notFound": "Page wasn't found.",
+  "title": "Error Page",
+  "description": "A simple shop with react application error page",
   "requiredField": "Input is required.",
   "unvalidEmail": "Must be a vald email.",
   "maxLengthFive": "The minimum width of this field is 5."

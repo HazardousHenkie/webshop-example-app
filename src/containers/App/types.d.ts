@@ -5,14 +5,14 @@ import { ApplicationRootState } from '../../types'
 
 interface AuthenticationState {
   readonly loading: boolean
-  readonly error?: object | boolean
+  readonly error?: Error | boolean
   readonly loggedIn: boolean
   readonly currentUser: string
 }
 
 type authenticationActions = ActionType<actions>
 
-type ContainerStateAuthentication = AuthenticationState
+type ContainerAuthenticationState = AuthenticationState
 type ContainerAuthenticationActions = authenticationActions
 
-export { ContainerStateAuthentication, ContainerAuthenticationActions }
+export { ContainerAuthenticationState, ContainerAuthenticationActions }

@@ -1,5 +1,7 @@
 {
   "notFound": "Pagina niet gevonden",
+  "title": "Error Page",
+  "description": "A simple shop with react application error page",
   "requiredField": "Verplicht veld.",
   "unvalidEmail": "Vul een e-mail adres in.",
   "maxLengthFive": "De minimale lengte is 5."

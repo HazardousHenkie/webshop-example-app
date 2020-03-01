@@ -10,7 +10,7 @@ interface Products {
 interface ProductsState {
   readonly productsData: Products
   readonly loading: boolean
-  readonly error?: object | boolean
+  readonly error?: Error | boolean
 }
 
 type ProductsActions = ActionType<typeof actions>

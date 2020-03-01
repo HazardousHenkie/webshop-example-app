@@ -1,5 +1,7 @@
 {
   "notFound": "ページ見つけられませんでした。",
+  "title": "Error Page",
+  "description": "A simple shop with react application error page",
   "requiredField": "入力が必要です。",
   "unvalidEmail": "有効なメールである必要があります。",
   "maxLengthFive": "このフィールドの最小幅は5です。"

@@ -7,6 +7,7 @@ export interface Product {
   id: number
   image: string
   title: string
+  short_description: string
   description: string
 }
 
