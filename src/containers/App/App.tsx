@@ -13,6 +13,8 @@ import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 import { createStructuredSelector } from 'reselect'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Helmet } from 'react-helmet'
+
 import MainMenu from './topMainMenu'
 import Footer from './footer'
 import Loader from 'components/Atoms/Loader'
@@ -70,6 +72,13 @@ const App: React.FC = () => {
         <GlobalStyle />
         <CssBaseline />
         <AppStyled loggedIn={loggedIn}>
+          <Helmet
+            titleTemplate="%s - React shop example"
+            defaultTitle="React shop example"
+          >
+            <meta name="description" content="A React shop example" />
+          </Helmet>
+
           {loggedIn && <MainMenu />}
 
           {loading && <Loader />}

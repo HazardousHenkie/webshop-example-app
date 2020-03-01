@@ -39,6 +39,7 @@ import { makeSelectLoggedIn } from 'containers/App/selectors'
 
 import ROUTES from 'strings/routes'
 
+import { Helmet } from 'react-helmet'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 interface FormSubmitInterface {
@@ -90,6 +91,13 @@ const ForgotPassword: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Forgot Password Page</title>
+        <meta
+          name="Forgot password page"
+          content="A simple shop with react applicaiton forgot password page"
+        />
+      </Helmet>
       {loading && <Loader />}
 
       <PaperWrapper loggedIn={loggedIn}>
