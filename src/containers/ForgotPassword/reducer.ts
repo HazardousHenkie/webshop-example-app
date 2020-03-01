@@ -24,12 +24,12 @@ function forgotPasswordReducer(
     case ActionTypes.SEND_PASSWORD_RESET_EMAIL_SUCCESS:
       return {
         message: 'an email with instructions has been send.',
-        error: state.error,
+        error: false,
         loading: false
       }
     case ActionTypes.SEND_PASSWORD_RESET_EMAIL_ERROR:
       return {
-        message: state.message,
+        message: '',
         error: action.payload,
         loading: false
       }
