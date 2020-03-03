@@ -22,7 +22,6 @@ const getProductDetailFailed = () =>
   })
 
 export {
-  selectProduct,
   makeSelectProductDetail,
   getProductDetailsLoader,
   getProductDetailFailed

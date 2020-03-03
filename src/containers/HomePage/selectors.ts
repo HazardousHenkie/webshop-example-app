@@ -21,4 +21,4 @@ const makeSelectError = () =>
     return substate.error
   })
 
-export { selectProducts, makeSelectProducts, makeSelectLoader, makeSelectError }
+export { makeSelectProducts, makeSelectLoader, makeSelectError }
