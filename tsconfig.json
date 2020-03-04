@@ -30,6 +30,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
+  "include": ["src", "setupProxy.js"],
   "exclude": ["node_modules"]
 }
