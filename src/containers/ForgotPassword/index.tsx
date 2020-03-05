@@ -14,7 +14,7 @@ import {
   StyledSubmitButton
 } from 'styles/styledComponents'
 
-import Loader from 'components/Molecules/Loader'
+import Loader from 'components/Atoms/Loader'
 
 import { createStructuredSelector } from 'reselect'
 
@@ -37,7 +37,7 @@ import { useTranslation } from 'react-i18next'
 
 import { makeSelectLoggedIn } from 'containers/App/selectors'
 
-import { LOGIN_LINK } from 'utils/routes'
+import ROUTES from 'strings/routes'
 
 interface FormSubmitInterface {
   email: string
@@ -84,7 +84,7 @@ const ForgotPassword: React.FC = () => {
             <InfoMessage
               severity="info"
               message={message}
-              link={LOGIN_LINK}
+              link={ROUTES.LOGIN_LINK}
               linkText="Back to login"
             />
           )}

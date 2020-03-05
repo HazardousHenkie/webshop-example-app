@@ -1,7 +1,7 @@
 import reduxSagaFirebase from 'utils/firebase'
 
 import { push } from 'connected-react-router'
-import { HOME } from 'utils/routes'
+import ROUTES from 'strings/routes'
 
 import { call, take, put, takeLatest, fork } from 'redux-saga/effects'
 
@@ -19,7 +19,7 @@ function* loginSaga(params: Record<string, any>) {
     if (params.payload.url) {
       yield put(push(params.payload.url))
     } else {
-      yield put(push(HOME))
+      yield put(push(ROUTES.HOME))
     }
   } catch (error) {
     yield put(loginError(error))

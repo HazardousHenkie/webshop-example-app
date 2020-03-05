@@ -50,6 +50,7 @@ export const LogoutButton = styled.button`
   font-size: 1rem;
   border: 0;
   margin-bottom: 6px;
+  cursor: button;
   color: ${props => props.theme.white};
 `
 export const FooterStyled = styled.footer`

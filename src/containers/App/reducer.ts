@@ -19,10 +19,7 @@ function authenticationReducer(
     case ActionTypes.LOGOUT:
     case ActionTypes.LOGIN:
       return {
-        error: state.error,
-        loggedIn: false,
-        loading: true,
-        currentUser: ''
+        ...state
       }
     case ActionTypes.LOGIN_SUCCESS:
       return {

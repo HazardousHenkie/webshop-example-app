@@ -14,9 +14,7 @@ function productReducer(
   switch (action.type) {
     case ActionTypes.GET_PRODUCT_DETAIL:
       return {
-        loading: true,
-        error: undefined,
-        product: undefined
+        ...state
       }
     case ActionTypes.GET_PRODUCT_DETAIL_SUCCESS:
       return {
