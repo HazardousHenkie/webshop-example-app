@@ -50,6 +50,7 @@ interface FormSubmitInterface {
 
 const key = 'register'
 
+// check captcha error
 const recaptchaRef = createRef() as RefObject<any>
 
 const stateSelector = createStructuredSelector({
@@ -203,7 +204,6 @@ const Register: React.FC = () => {
               fullWidth={true}
               margin="normal"
             />
-            {console.log(errors)}
 
             <ReCAPTCHA
               ref={recaptchaRef}

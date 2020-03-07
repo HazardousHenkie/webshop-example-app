@@ -56,7 +56,8 @@ const App: React.FC = () => {
     } else {
       dispatch(switchTheme(prefersDarkMode))
     }
-  })
+    // eslint-disable-next-line
+  }, [cookies.darkMode, dispatch, prefersDarkMode])
 
   useEffect(() => {
     if (darkMode) {
