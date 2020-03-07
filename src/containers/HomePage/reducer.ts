@@ -23,7 +23,7 @@ function productsReducer(
     case ActionTypes.GET_PRODUCTS_SUCCESS:
       return {
         loading: false,
-        error: state.error,
+        error: false,
         productsData: {
           products: action.payload.products
         }

@@ -39,11 +39,15 @@ import { makeSelectLoggedIn } from 'containers/App/selectors'
 
 import ROUTES from 'strings/routes'
 
+import ReCAPTCHA from 'react-google-recaptcha'
+
 interface FormSubmitInterface {
   email: string
 }
 
 const key = 'passwordrequest'
+
+const recaptchaRef = React.createRef() as Record<string, any>
 
 const stateSelector = createStructuredSelector({
   message: makeSelectMessage(),
@@ -55,6 +59,7 @@ const stateSelector = createStructuredSelector({
 const ForgotPassword: React.FC = () => {
   const { message, error, loading, loggedIn } = useSelector(stateSelector)
   const [submitting, setSubmitting] = useState(false)
+  const [recaptchaError, setRecaptchaError] = useState(false)
   const dispatch = useDispatch()
 
   useInjectReducer({ key, reducer })
@@ -67,7 +72,19 @@ const ForgotPassword: React.FC = () => {
   const { t } = useTranslation('error')
 
   const submitForm = handleSubmit(({ email }) => {
-    dispatch(sendPasswordResetEmail(email))
+    recaptchaRef.current.execute()
+    const recaptchaValue = recaptchaRef.current.getValue()
+
+    if (recaptchaError) {
+      setRecaptchaError(false)
+    }
+
+    if (recaptchaValue !== '') {
+      dispatch(sendPasswordResetEmail(email))
+    } else {
+      setRecaptchaError(true)
+    }
+
     setSubmitting(false)
   })
 
@@ -110,6 +127,12 @@ const ForgotPassword: React.FC = () => {
               margin="normal"
             />
 
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              size="invisible"
+              sitekey={process.env.REACT_APP_RECAPTCHA}
+            />
+
             <StyledSubmitButton
               type="submit"
               variant="contained"
@@ -122,6 +145,9 @@ const ForgotPassword: React.FC = () => {
           </form>
 
           {error && <InfoMessage severity="error" message={error.toString()} />}
+          {recaptchaError && (
+            <InfoMessage severity="error" message="Recaptcha wasn't valid." />
+          )}
         </StyledPaper>
       </PaperWrapper>
     </>

@@ -23,7 +23,7 @@ function authenticationReducer(
       }
     case ActionTypes.LOGIN_SUCCESS:
       return {
-        error: state.error,
+        error: false,
         loggedIn: true,
         loading: false,
         currentUser: action.payload
@@ -38,7 +38,7 @@ function authenticationReducer(
       }
     case ActionTypes.LOGOUT_SUCCESS:
       return {
-        error: state.error,
+        error: false,
         loggedIn: false,
         loading: false,
         currentUser: ''

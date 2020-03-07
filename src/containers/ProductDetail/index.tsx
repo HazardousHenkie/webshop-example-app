@@ -23,7 +23,10 @@ import withAuthorization from 'containers/Authentication'
 import InfoMessage from 'components/Molecules/InfoMessage'
 import InlineLoader from 'components/Atoms/InlineLoader'
 
+import Grid from '@material-ui/core/Grid'
+
 import { Wrapper } from 'styles/styledComponents'
+import { TypographyStyled } from './styledComponents'
 
 import { useParams } from 'react-router-dom'
 
@@ -59,7 +62,29 @@ const ProductDetailPage: React.FC<Record<string, any>> = productFromRoute => {
     <Wrapper>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
-      {product && product.id}
+      {product && (
+        <>
+          <Grid item={true} xs={12}>
+            <TypographyStyled variant="h1" color="inherit">
+              {product.title}
+            </TypographyStyled>
+          </Grid>
+          <Grid container={true} justify="center" spacing={2}>
+            {product.image && (
+              <Grid item={true} xs={6}>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  title={product.title}
+                />
+              </Grid>
+            )}
+            <Grid item={true} xs={product.image ? 6 : 12}>
+              {product.description}
+            </Grid>
+          </Grid>
+        </>
+      )}
     </Wrapper>
   )
 }

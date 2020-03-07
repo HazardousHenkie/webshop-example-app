@@ -56,5 +56,5 @@ export const LogoutButton = styled.button`
 export const FooterStyled = styled.footer`
   margin: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `
