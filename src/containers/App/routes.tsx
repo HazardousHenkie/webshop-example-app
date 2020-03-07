@@ -8,6 +8,7 @@ import Loader from 'components/Atoms/Loader'
 const Home = lazy(() => import('../HomePage'))
 const Login = lazy(() => import('../Login'))
 const ForgotPassword = lazy(() => import('../ForgotPassword'))
+const Register = lazy(() => import('../Register'))
 const ProductDetail = lazy(() => import('../ProductDetail'))
 const Error = lazy(() => import('../Error'))
 
@@ -21,6 +22,7 @@ const Routes: React.FC = () => {
           exact={true}
           component={ForgotPassword}
         />
+        <Route path={ROUTES.REGISTER} exact={true} component={Register} />
         <Route path={ROUTES.HOME} exact={true} component={Home} />
         <Route
           path={`${ROUTES.PRODUCT_LINK}:id`}

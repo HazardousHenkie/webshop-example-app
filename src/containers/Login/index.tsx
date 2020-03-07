@@ -121,10 +121,10 @@ const LoginPage: React.FC = () => {
                     'Input is required.'
                   ) as string,
                   minLength: {
-                    value: 5,
+                    value: 6,
                     message: t(
-                      'error:maxLengthFive',
-                      'The minimum width of this field is 5.'
+                      'error:maxLengthSix',
+                      'The minimum width of this field is 6.'
                     )
                   }
                 })}

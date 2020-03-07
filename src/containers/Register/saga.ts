@@ -6,12 +6,12 @@ import { registerSuccess, registerError } from './actions'
 
 import ActionTypes from './constants'
 
-function* registerSaga(params: Record<string, any>) {
+function* registerSaga(params) {
   try {
     yield call(
-      // @ts-ignore firebase redux saga needs extra params but we won't use them so disabling tslint here
-      reduxSagaFirebase.auth.sendPasswordResetEmail,
-      params.payload
+      reduxSagaFirebase.auth.createUserWithEmailAndPassword,
+      params.payload.email,
+      params.payload.password
     )
     yield put(registerSuccess())
   } catch (error) {

@@ -44,6 +44,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
 
 interface FormSubmitInterface {
   email: string
+  password: string
+  password_confirmation: string
 }
 
 const key = 'register'
@@ -66,13 +68,15 @@ const Register: React.FC = () => {
   useInjectReducer({ key, reducer })
   useInjectSaga({ key, saga })
 
-  const { register, handleSubmit, errors } = useForm<FormSubmitInterface>({
+  const { register, handleSubmit, watch, errors } = useForm<
+    FormSubmitInterface
+  >({
     mode: 'onChange'
   })
 
   const { t } = useTranslation(['error', 'register'])
 
-  const submitForm = handleSubmit(({ email }) => {
+  const submitForm = handleSubmit(({ email, password }) => {
     recaptchaRef.current.execute()
     const recaptchaValue = recaptchaRef.current.getValue()
 
@@ -81,7 +85,7 @@ const Register: React.FC = () => {
     }
 
     if (recaptchaValue !== '') {
-      dispatch(registerAction(email))
+      dispatch(registerAction(email, password))
     } else {
       setRecaptchaError(true)
     }
@@ -140,13 +144,72 @@ const Register: React.FC = () => {
               fullWidth={true}
               margin="normal"
             />
+            <TextField
+              error={hasSpecificErrors(errors.password)}
+              type="password"
+              label={t('register:passwordLabel', 'Password')}
+              name="password"
+              inputRef={register({
+                required: t(
+                  'error:requiredField',
+                  'Input is required.'
+                ) as string,
+                minLength: {
+                  value: 6,
+                  message: t(
+                    'error:maxLengthSix',
+                    'The minimum width of this field is 6.'
+                  )
+                }
+              })}
+              helperText={errors.password && errors.password.message}
+              variant="outlined"
+              fullWidth={true}
+              margin="normal"
+            />
+
+            <TextField
+              error={hasSpecificErrors(errors.password_confirmation)}
+              type="password"
+              label={t(
+                'register:passwor_confirmation',
+                'Password confirmation'
+              )}
+              name="password_confirmation"
+              inputRef={register({
+                required: t(
+                  'error:requiredField',
+                  'Input is required.'
+                ) as string,
+                validate: value =>
+                  value === watch('password') ||
+                  (t(
+                    'error:passwordNotMatching',
+                    "passwords don't match"
+                  ) as string),
+                minLength: {
+                  value: 6,
+                  message: t(
+                    'error:maxLengthSix',
+                    'The minimum width of this field is 6.'
+                  )
+                }
+              })}
+              helperText={
+                errors.password_confirmation &&
+                errors.password_confirmation.message
+              }
+              variant="outlined"
+              fullWidth={true}
+              margin="normal"
+            />
+            {console.log(errors)}
 
             <ReCAPTCHA
               ref={recaptchaRef}
               size="invisible"
               sitekey={process.env.REACT_APP_RECAPTCHA as string}
             />
-
             <StyledSubmitButton
               type="submit"
               variant="contained"
