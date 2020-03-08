@@ -12,7 +12,7 @@ const prodConfig = {
   storageBucket: process.env.REACT_APP_PROD_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_PROD_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_PROD_MESSAGING_APP_ID,
-  measurementId: process.env.REACT_PROD_DEV_MESSAGING_MEASUREMENT_ID
+  measurementId: process.env.REACT_PROD_MESSAGING_MEASUREMENT_ID
 }
 
 const devConfig = {
