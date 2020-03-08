@@ -4,6 +4,8 @@
   "typographyTitle": "Register",
   "succesMessage": " an email with instructions has been send.",
   "emailLabel": "E-mail",
+  "passwordLabel": "Password",
+  "passwor_confirmation": "Password confirmation",
   "resetButton": "Register",
   "captcha": "Recaptcha wasn't valid."
 }

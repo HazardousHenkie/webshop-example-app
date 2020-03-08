@@ -11,7 +11,6 @@ import CardActions from '@material-ui/core/CardActions'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import InfoIcon from '@material-ui/icons/Info'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 import { useTranslation } from 'react-i18next'
 
@@ -49,14 +48,14 @@ const Product: React.FC<ProductInterface> = ({ product }) => {
           >
             <InfoIcon />
           </IconButtonStyled>
-          <IconButton
+          {/* <IconButton
             aria-label={t(
               'forgotPassword:addToShoppingCart',
               'add to shopping cart'
             )}
           >
             <ShoppingCartIcon />
-          </IconButton>
+          </IconButton> */}
         </CardActions>
       </Card>
     </Grid>

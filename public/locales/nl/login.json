@@ -1,9 +1,11 @@
 {
-  "title": "Login Page",
-  "description": "A simple shop with react application login page",
+  "title": "Login Pagina",
+  "description": "React shop login pagina",
   "email": "E-mail",
-  "password": "Password",
-  "forgotPassword": "Forgot your Password?",
-  "resetPassword": "Reset password!",
+  "password": "Wachtwoord",
+  "forgotPasswordMessgae": "Wachtwoord vergeten?",
+  "resetPasswordButton": "Reset Wachtwoord!",
+  "registerMessage": "Nog geen account?",
+  "registerButton": "Registreer!",
   "Login": "Login"
 }
