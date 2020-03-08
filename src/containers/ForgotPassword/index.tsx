@@ -73,7 +73,6 @@ const ForgotPassword: React.FC = () => {
   const { t } = useTranslation(['error', 'forgotPassword'])
 
   const submitForm = handleSubmit(({ email }) => {
-    recaptchaRef.current.execute()
     const recaptchaValue = recaptchaRef.current.getValue()
 
     if (recaptchaError) {
@@ -143,7 +142,6 @@ const ForgotPassword: React.FC = () => {
 
             <ReCAPTCHA
               ref={recaptchaRef}
-              size="invisible"
               sitekey={process.env.REACT_APP_RECAPTCHA as string}
             />
 

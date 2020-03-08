@@ -50,7 +50,6 @@ interface FormSubmitInterface {
 
 const key = 'register'
 
-// check captcha error
 const recaptchaRef = createRef() as RefObject<any>
 
 const stateSelector = createStructuredSelector({
@@ -78,7 +77,6 @@ const Register: React.FC = () => {
   const { t } = useTranslation(['error', 'register'])
 
   const submitForm = handleSubmit(({ email, password }) => {
-    recaptchaRef.current.execute()
     const recaptchaValue = recaptchaRef.current.getValue()
 
     if (recaptchaError) {
@@ -116,10 +114,7 @@ const Register: React.FC = () => {
           {message && (
             <InfoMessage
               severity="info"
-              message={t(
-                'register:succesMessage',
-                ' an email with instructions has been send.'
-              )}
+              message={t('register:succesMessage', 'You have been registered.')}
               link={ROUTES.LOGIN_LINK}
               linkText="Back to login"
             />
@@ -207,7 +202,6 @@ const Register: React.FC = () => {
 
             <ReCAPTCHA
               ref={recaptchaRef}
-              size="invisible"
               sitekey={process.env.REACT_APP_RECAPTCHA as string}
             />
             <StyledSubmitButton

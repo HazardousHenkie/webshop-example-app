@@ -28,7 +28,7 @@ import {
   StyledSubmitButton
 } from 'styles/styledComponents'
 
-import { StyledLink } from './styledComponents'
+import { StyledLink, StyledTypography } from './styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 
@@ -135,11 +135,18 @@ const LoginPage: React.FC = () => {
               />
 
               <Typography variant="body1">
-                {t('login:forgotPassword', 'Forgot your Password?')}
+                {t('login:forgotPasswordMessgae', 'Forgot your Password?')}
                 <StyledLink to={ROUTES.FORGOT_PASSWORD}>
-                  {t('login:resetPassword', 'Reset password!')}
+                  {t('login:resetPasswordButton', 'Reset password!')}
                 </StyledLink>
               </Typography>
+
+              <StyledTypography variant="body1">
+                {t('login:registerMessgae', "Don't have an account yet?")}
+                <StyledLink to={ROUTES.REGISTER}>
+                  {t('login:registerButton', 'Register!')}
+                </StyledLink>
+              </StyledTypography>
 
               <StyledSubmitButton
                 type="submit"
