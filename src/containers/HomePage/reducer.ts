@@ -29,11 +29,12 @@ function productsReducer(
         }
       }
     case ActionTypes.GET_PRODUCTS_FAILED:
-      const { ...rest } = state
       return {
         loading: false,
         error: action.payload,
-        ...rest
+        productsData: {
+          products: []
+        }
       }
     default:
       return state

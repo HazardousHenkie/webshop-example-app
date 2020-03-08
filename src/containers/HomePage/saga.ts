@@ -8,12 +8,13 @@ import { Product } from 'containers/ProductDetail/types'
 
 import ActionTypes from './constants'
 
-function* getProductsSaga() {
+function* getProductsSaga(params: Record<string, any>) {
   try {
     const snapshot = yield call(
       reduxSagaFirebase.firestore.getCollection,
-      'products'
+      `products/${params.payload}/products`
     )
+
     const products: Product[] = []
     snapshot.forEach((product: firebase.firestore.DocumentData) => {
       products.push({ ...product.data(), id: product.id })
