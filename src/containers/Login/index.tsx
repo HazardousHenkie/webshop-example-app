@@ -142,7 +142,7 @@ const LoginPage: React.FC = () => {
               </Typography>
 
               <StyledTypography variant="body1">
-                {t('login:registerMessgae', "Don't have an account yet?")}
+                {t('login:registerMessage', "Don't have an account yet?")}
                 <StyledLink to={ROUTES.REGISTER}>
                   {t('login:registerButton', 'Register!')}
                 </StyledLink>
