@@ -128,9 +128,8 @@ const ForgotPassword: React.FC = () => {
             />
 
             <ReCAPTCHA
-              ref={recaptchaRef}
-              size="invisible"
-              sitekey={process.env.REACT_APP_RECAPTCHA}
+              ref={recaptchaRef as any}
+              sitekey={process.env.REACT_APP_RECAPTCHA as string}
             />
 
             <StyledSubmitButton
