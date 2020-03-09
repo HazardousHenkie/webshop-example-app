@@ -23,6 +23,7 @@
     "react-cookie": "^4.0.3",
     "react-dom": "^16.12.0",
     "react-google-recaptcha": "^2.0.1",
+    "react-helmet": "^5.2.1",
     "react-hook-form": "^4.9.8",
     "react-i18next": "^11.3.3",
     "react-redux": "^7.1.3",
