@@ -82,6 +82,7 @@ const App: React.FC = () => {
               name="description"
               content={t('app:descriptionTitle', 'A React shop example')}
             />
+
           </Helmet>
 
           {loggedIn && <MainMenu />}
