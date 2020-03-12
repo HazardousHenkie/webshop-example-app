@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 import { appLocales } from 'utils/i18n'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ const LocaleToggle: React.FC = () => {
   const { i18n } = useTranslation(languageScope)
 
   const onLocaleToggle = (
-    event: React.ChangeEvent<{
+    event: ChangeEvent<{
       value: string
     }>
   ) => {

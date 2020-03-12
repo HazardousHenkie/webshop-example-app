@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux'
 import { makeSelectLoggedIn } from 'containers/App/selectors'
 import { createSelector } from 'reselect'
 
+import { Helmet } from 'react-helmet'
+
 const stateSelector = createSelector(makeSelectLoggedIn(), loggedIn => ({
   loggedIn
 }))
@@ -28,6 +30,16 @@ const ErrorPage: React.FC<WithTranslation & ErrorType> = ({
 
   return (
     <ErrorPageDiv loggedIn={loggedIn}>
+      <Helmet>
+        <title>{t('error:title', 'Error Page')}</title>
+        <meta
+          name={t('error:title', 'Error Page')}
+          content={t(
+            'error:description',
+            'A simple shop with react application error page'
+          )}
+        />
+      </Helmet>
       <StyledTypographyTitle align="center" variant="h1">
         {errorCode}
       </StyledTypographyTitle>

@@ -26,6 +26,9 @@ import Grid from '@material-ui/core/Grid'
 
 import { Wrapper } from 'styles/styledComponents'
 
+import { Helmet } from 'react-helmet'
+import { useTranslation } from 'react-i18next'
+
 const key = 'products'
 
 const stateSelector = createStructuredSelector({
@@ -37,6 +40,7 @@ const stateSelector = createStructuredSelector({
 const HomePage: React.FC = () => {
   const { products, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
+  const { t } = useTranslation('homePage')
 
   useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
@@ -49,8 +53,20 @@ const HomePage: React.FC = () => {
 
   return (
     <Wrapper>
+      <Helmet>
+        <title>{t('homePage:title', 'Products Page')}</title>
+        <meta
+          name={t('homePage:title', 'Products Page')}
+          content={t(
+            'homePage:description',
+            'A simple shop with react application products page'
+          )}
+        />
+      </Helmet>
       {loading && <InlineLoader />}
+
       {error && <InfoMessage severity="error" message={error.toString()} />}
+
       <Grid container={true} spacing={3}>
         {!loading &&
           !error &&

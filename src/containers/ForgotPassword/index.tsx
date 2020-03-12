@@ -48,7 +48,7 @@ interface FormSubmitInterface {
 
 const key = 'passwordrequest'
 
-const recaptchaRef = React.createRef() as Record<string, any>
+const recaptchaRef = React.createRef() as React.RefObject<any>
 
 const stateSelector = createStructuredSelector({
   message: makeSelectMessage(),
@@ -70,10 +70,9 @@ const ForgotPassword: React.FC = () => {
     mode: 'onChange'
   })
 
-  const { t } = useTranslation('error')
+  const { t } = useTranslation(['error', 'forgotPassword'])
 
   const submitForm = handleSubmit(({ email }) => {
-    recaptchaRef.current.execute()
     const recaptchaValue = recaptchaRef.current.getValue()
 
     if (recaptchaError) {
@@ -92,10 +91,13 @@ const ForgotPassword: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Forgot Password Page</title>
+        <title>{t('forgotPassword:title', 'Forgot Password Page')}</title>
         <meta
-          name="Forgot password page"
-          content="A simple shop with react applicaiton forgot password page"
+          name={t('forgotPassword:title', 'Forgot Password Page')}
+          content={t(
+            'forgotPassword:description',
+            'A simple shop with react application forgot password page'
+          )}
         />
       </Helmet>
       {loading && <Loader />}
@@ -103,12 +105,15 @@ const ForgotPassword: React.FC = () => {
       <PaperWrapper loggedIn={loggedIn}>
         <StyledPaper variant="outlined">
           <StyledTypographyTitle align="center" variant="h1">
-            Forgot password
+            {t('forgotPassword:typographyTitle', ' Forgot password')}
           </StyledTypographyTitle>
           {message && (
             <InfoMessage
               severity="info"
-              message={message}
+              message={t(
+                'forgotPassword:succesMessage',
+                ' an email with instructions has been send.'
+              )}
               link={ROUTES.LOGIN_LINK}
               linkText="Back to login"
             />
@@ -117,7 +122,7 @@ const ForgotPassword: React.FC = () => {
             <TextField
               error={hasSpecificErrors(errors.email)}
               type="email"
-              label="E-mail"
+              label={t('forgotPassword:emailLabel', 'E-mail')}
               name="email"
               inputRef={register({
                 required: t(
@@ -126,7 +131,7 @@ const ForgotPassword: React.FC = () => {
                 ) as string,
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: t('error:unvalidEmail', 'Must be  vld email.')
+                  message: t('error:unvalidEmail', 'Must be  valid email.')
                 }
               })}
               helperText={errors.email && errors.email.message}
@@ -136,7 +141,7 @@ const ForgotPassword: React.FC = () => {
             />
 
             <ReCAPTCHA
-              ref={recaptchaRef as any}
+              ref={recaptchaRef}
               sitekey={process.env.REACT_APP_RECAPTCHA as string}
             />
 
@@ -147,13 +152,16 @@ const ForgotPassword: React.FC = () => {
               fullWidth={true}
               disabled={submitting || hasErrors(errors)}
             >
-              Reset password
+              {t('forgotPassword:resetButton', 'Reset password')}
             </StyledSubmitButton>
           </form>
 
           {error && <InfoMessage severity="error" message={error.toString()} />}
           {recaptchaError && (
-            <InfoMessage severity="error" message="Recaptcha wasn't valid." />
+            <InfoMessage
+              severity="error"
+              message={t('forgotPassword:captcha', "Recaptcha wasn't valid.")}
+            />
           )}
         </StyledPaper>
       </PaperWrapper>

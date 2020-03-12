@@ -28,11 +28,12 @@ import {
   StyledSubmitButton
 } from 'styles/styledComponents'
 
-import { StyledLink } from './styledComponents'
+import { StyledLink, StyledTypography } from './styledComponents'
 
 import InfoMessage from 'components/Molecules/InfoMessage'
 
 import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 interface FormSubmitInterface {
   email: string
@@ -54,7 +55,7 @@ const LoginPage: React.FC = () => {
     mode: 'onChange'
   })
 
-  const { t } = useTranslation('error')
+  const { t } = useTranslation(['error', 'login'])
 
   useEffect(() => {
     if (loggedIn) {
@@ -69,6 +70,17 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{t('login:title', 'Login Page')}</title>
+        <meta
+          name={t('login:title', 'Login Page')}
+          content={t(
+            'login:description',
+            'A simple shop with react application login page'
+          )}
+        />
+      </Helmet>
+
       {!loggedIn && !loading && (
         <PaperWrapper loggedIn={loggedIn}>
           <StyledPaper variant="outlined">
@@ -80,7 +92,7 @@ const LoginPage: React.FC = () => {
               <TextField
                 error={hasSpecificErrors(errors.email)}
                 type="email"
-                label="E-mail"
+                label={t('login:email', 'E-mail')}
                 name="email"
                 inputRef={register({
                   required: t(
@@ -101,7 +113,7 @@ const LoginPage: React.FC = () => {
               <TextField
                 error={hasSpecificErrors(errors.password)}
                 type="password"
-                label="Password"
+                label={t('login:password', 'Password')}
                 name="password"
                 inputRef={register({
                   required: t(
@@ -109,10 +121,10 @@ const LoginPage: React.FC = () => {
                     'Input is required.'
                   ) as string,
                   minLength: {
-                    value: 5,
+                    value: 6,
                     message: t(
-                      'error:maxLengthFive',
-                      'The minimum width of this field is 5.'
+                      'error:maxLengthSix',
+                      'The minimum width of this field is 6.'
                     )
                   }
                 })}
@@ -123,11 +135,18 @@ const LoginPage: React.FC = () => {
               />
 
               <Typography variant="body1">
-                Forgot your Password?
+                {t('login:forgotPasswordMessgae', 'Forgot your Password?')}
                 <StyledLink to={ROUTES.FORGOT_PASSWORD}>
-                  Reset password!
+                  {t('login:resetPasswordButton', 'Reset password!')}
                 </StyledLink>
               </Typography>
+
+              <StyledTypography variant="body1">
+                {t('login:registerMessage', "Don't have an account yet?")}
+                <StyledLink to={ROUTES.REGISTER}>
+                  {t('login:registerButton', 'Register!')}
+                </StyledLink>
+              </StyledTypography>
 
               <StyledSubmitButton
                 type="submit"
@@ -136,7 +155,7 @@ const LoginPage: React.FC = () => {
                 fullWidth={true}
                 disabled={submitting || hasErrors(errors)}
               >
-                Login
+                {t('login:Login', 'Login')}
               </StyledSubmitButton>
             </form>
 

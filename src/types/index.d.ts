@@ -3,12 +3,10 @@ import { RouterState } from 'connected-react-router'
 import { Saga } from 'redux-saga'
 import { ContainerProductsState as ProductsState } from 'containers/HomePage/types'
 import { ContainerProductState as ProductState } from 'containers/ProductDetail/types'
-import {
-  ContainerStateAuthentication,
-  ContainerStateLoader
-} from 'containers/App/types'
+import { ContainerAuthenticationState as AuthenticationState } from 'containers/App/types'
 import { ContainerLoginState as LoginState } from 'containers/Login/types'
 import { ContainerForgotPasswordState as ForgotPasswordState } from 'containers/ForgotPassword/types'
+import { ContainerRegisterState as RegisterState } from 'containers/Register/types'
 import { ContainerThemeSwitcherState as ThemeSwitcherState } from 'containers/ThemeSwitcher/types'
 
 export interface InjectedStore extends Store {
@@ -34,7 +32,8 @@ export interface InjectSagaParams {
 export interface ApplicationRootState {
   readonly router: RouterState
   readonly passwordrequest: ForgotPasswordState
-  readonly authentication: ContainerStateAuthentication
+  readonly authentication: AuthenticationState
+  readonly register: RegisterState
   readonly products: ProductsState
   readonly product: ProductState
   readonly themeSwitcher: ThemeSwitcherState

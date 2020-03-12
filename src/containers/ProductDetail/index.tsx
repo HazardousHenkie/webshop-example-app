@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { useInjectSaga } from 'utils/injectSaga'
-import { useInjectReducer } from 'utils/injectReducer'
 
 import {
   makeSelectProductDetail,
   getProductDetailFailed,
   getProductDetailsLoader
 } from './selectors'
-import reducer from './reducer'
+
 import saga from './saga'
 
 import { getProductDetail, getProductDetailSuccess } from './actions'
@@ -29,6 +28,8 @@ import { Wrapper } from 'styles/styledComponents'
 import { TypographyStyled } from './styledComponents'
 
 import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { Helmet } from 'react-helmet'
 
 const key = 'product'
 
@@ -43,12 +44,13 @@ const ProductDetailPage: React.FC<Record<string, any>> = productFromRoute => {
   const dispatch = useDispatch()
   const { id } = useParams()
 
+  const { t } = useTranslation('product')
+
+  useInjectSaga({ key, saga })
+
   if (productFromRoute && productFromRoute.location.state) {
     dispatch(getProductDetailSuccess(productFromRoute.location.state.product))
   }
-
-  useInjectSaga({ key, saga })
-  useInjectReducer({ key, reducer })
 
   useEffect(() => {
     if (!product && id && !productFromRoute.location.state) {
@@ -60,6 +62,16 @@ const ProductDetailPage: React.FC<Record<string, any>> = productFromRoute => {
     <ErrorPage errorCode={error.status} errorMessage={'Product not found.'} />
   ) : (
     <Wrapper>
+      <Helmet>
+        <title>{t('product:title', 'Product Page')}</title>
+        <meta
+          name={t('product:title', 'Product Page')}
+          content={t(
+            'product:description',
+            'A simple shop with react application product page'
+          )}
+        />
+      </Helmet>
       {loading && <InlineLoader />}
       {error && <InfoMessage severity="error" message={error.toString()} />}
       {product && (

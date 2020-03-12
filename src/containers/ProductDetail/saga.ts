@@ -18,10 +18,10 @@ function* getProductSaga(id: Record<string, any>) {
       const product = { ...snapshot.data(), id: id.payload }
 
       yield put(getProductDetailSuccess(product))
+    } else {
+      const error = new CustomError('Page not found.', 404)
+      throw error
     }
-
-    const error = new CustomError('Page not found.', 404)
-    throw error
   } catch (error) {
     yield put(getProductDetailFailed(error))
   }

@@ -5,7 +5,7 @@ import {
 import ActionTypes from './constants'
 
 export const initialStateForgotPassword: ContainerForgotPasswordState = {
-  message: '',
+  message: false,
   error: false,
   loading: false
 }
@@ -23,13 +23,13 @@ function forgotPasswordReducer(
       }
     case ActionTypes.SEND_PASSWORD_RESET_EMAIL_SUCCESS:
       return {
-        message: 'an email with instructions has been send.',
+        message: true,
         error: false,
         loading: false
       }
     case ActionTypes.SEND_PASSWORD_RESET_EMAIL_ERROR:
       return {
-        message: '',
+        message: false,
         error: action.payload,
         loading: false
       }

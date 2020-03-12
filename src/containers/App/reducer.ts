@@ -1,10 +1,10 @@
 import {
-  ContainerStateAuthentication,
+  ContainerAuthenticationState,
   ContainerAuthenticationActions
 } from './types'
 import ActionTypes from './constants'
 
-export const initialStateAuthentication: ContainerStateAuthentication = {
+export const initialStateAuthentication: ContainerAuthenticationState = {
   error: false,
   loggedIn: false,
   loading: true,
@@ -12,9 +12,9 @@ export const initialStateAuthentication: ContainerStateAuthentication = {
 }
 
 function authenticationReducer(
-  state: ContainerStateAuthentication = initialStateAuthentication,
+  state: ContainerAuthenticationState = initialStateAuthentication,
   action: ContainerAuthenticationActions
-): ContainerStateAuthentication {
+): ContainerAuthenticationState {
   switch (action.type) {
     case ActionTypes.LOGOUT:
     case ActionTypes.LOGIN:
