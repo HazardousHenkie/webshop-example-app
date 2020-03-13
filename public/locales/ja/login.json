@@ -1,9 +1,11 @@
 {
-  "title": "Login Page",
-  "description": "A simple shop with react application login page",
-  "email": "E-mail",
-  "password": "Password",
-  "forgotPassword": "Forgot your Password?",
-  "resetPassword": "Reset password!",
-  "Login": "Login"
+  "title": "ログインページ",
+  "description": "簡単なreactショップのログインページ",
+  "email": "メール",
+  "password": "パスワード",
+  "forgotPasswordMessgae": "パスワードを忘れましたか？",
+  "resetPasswordButton": "パスワードを再設定する!",
+  "registerMessage": "まだアカウントを持っていませんか?",
+  "registerButton": "登録!",
+  "Login": "ログイン"
 }

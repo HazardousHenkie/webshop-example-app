@@ -3,7 +3,9 @@
   "description": "A simple shop with react application login page",
   "email": "E-mail",
   "password": "Password",
-  "forgotPassword": "Forgot your Password?",
-  "resetPassword": "Reset password!",
+  "forgotPasswordMessgae": "Forgot your Password?",
+  "resetPasswordButton": "Reset password!",
+  "registerMessage": "Don't have an account yet?",
+  "registerButton": "Register!",
   "Login": "Login"
 }

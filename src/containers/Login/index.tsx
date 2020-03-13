@@ -85,7 +85,7 @@ const LoginPage: React.FC = () => {
         <PaperWrapper loggedIn={loggedIn}>
           <StyledPaper variant="outlined">
             <StyledTypographyTitle align="center" variant="h1">
-              Login
+              {t('login:Login', 'Login')}
             </StyledTypographyTitle>
 
             <form onSubmit={submitForm}>

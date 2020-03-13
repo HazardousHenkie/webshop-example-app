@@ -40,16 +40,16 @@ const stateSelector = createStructuredSelector({
 const HomePage: React.FC = () => {
   const { products, error, loading } = useSelector(stateSelector)
   const dispatch = useDispatch()
-  const { t } = useTranslation('homePage')
+  const { t, i18n } = useTranslation('homePage')
 
   useInjectSaga({ key, saga })
   useInjectReducer({ key, reducer })
 
   useEffect(() => {
-    if (products?.length === 0) {
-      dispatch(getProducts())
+    if (!error) {
+      dispatch(getProducts(i18n.language))
     }
-  }, [products, dispatch])
+  }, [error, dispatch, i18n.language])
 
   return (
     <Wrapper>

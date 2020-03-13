@@ -1,9 +1,11 @@
 {
-  "title": "Register Page",
-  "description": "A simple shop with react application register page",
-  "typographyTitle": "Register",
-  "succesMessage": " an email with instructions has been send.",
+  "title": "Registreer Pagina",
+  "description": "Simpele react shop registreer pagina.",
+  "typographyTitle": "Registreer",
+  "succesMessage": "Een email met instructies is verzonden.",
   "emailLabel": "E-mail",
-  "resetButton": "Register",
-  "captcha": "Recaptcha wasn't valid."
+  "passwordLabel": "Wachtwoord",
+  "passwor_confirmation": "Wachtwoord confirmatie",
+  "resetButton": "Registreer",
+  "captcha": "Recaptcha was niet geldig."
 }

@@ -1,8 +1,9 @@
 {
   "notFound": "Pagina niet gevonden",
-  "title": "Error Page",
-  "description": "A simple shop with react application error page",
+  "title": "Error Pagina",
+  "description": "Simpele react shop error pagina.",
   "requiredField": "Verplicht veld.",
   "unvalidEmail": "Vul een e-mail adres in.",
-  "maxLengthFive": "De minimale lengte is 5."
+  "maxLengthSix": "Minimaal 6 karakters.",
+  "passwordNotMatching": "Wachtwoorden komen niet overeen."
 }
