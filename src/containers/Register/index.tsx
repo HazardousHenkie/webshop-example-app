@@ -116,7 +116,7 @@ const Register: React.FC = () => {
               severity="info"
               message={t('register:succesMessage', 'You have been registered.')}
               link={ROUTES.LOGIN_LINK}
-              linkText="Back to login"
+              linkText={t('register:toHome', 'to homepage.')}
             />
           )}
           <form onSubmit={submitForm}>

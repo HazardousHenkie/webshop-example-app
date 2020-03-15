@@ -3,6 +3,7 @@
   "description": "A simple shop with react application register page",
   "typographyTitle": "Register",
   "succesMessage": " an email with instructions has been send.",
+  "toHome": "to homepage.",
   "emailLabel": "E-mail",
   "passwordLabel": "Password",
   "passwor_confirmation": "Password confirmation",

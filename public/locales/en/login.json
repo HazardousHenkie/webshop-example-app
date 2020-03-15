@@ -1,11 +1,11 @@
 {
   "title": "Login Page",
   "description": "A simple shop with react application login page",
+  "Login": "Login",
   "email": "E-mail",
   "password": "Password",
   "forgotPasswordMessgae": "Forgot your Password?",
   "resetPasswordButton": "Reset password!",
   "registerMessage": "Don't have an account yet?",
-  "registerButton": "Register!",
-  "Login": "Login"
+  "registerButton": "Register!"
 }

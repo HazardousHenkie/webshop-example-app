@@ -2,6 +2,8 @@
 
 All my project are made to study and show my capabilities so I made a simple webshop example using react, redux, redux saga, material UI, i18next, react hook form, react helmet, typescript and firebase. I still want to add more functionality like: shopping cart, search functionality, pagination/infinite loading, better responsive support and user information screen but other than that everything should be working!
 
+link: https://saga-shop.herokuapp.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

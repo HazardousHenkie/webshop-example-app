@@ -3,6 +3,7 @@
   "description": "簡単なreactショップの製品ページ",
   "typographyTitle": "登録",
   "succesMessage": "手順を記載したメールが送信されました。",
+  "toHome": "ホームへ",
   "emailLabel": "メール",
   "passwordLabel": "パスワード",
   "passwor_confirmation": "パスワード確認",

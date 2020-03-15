@@ -3,6 +3,7 @@
   "description": "Simpele react shop registreer pagina.",
   "typographyTitle": "Registreer",
   "succesMessage": "Een email met instructies is verzonden.",
+  "toHome": "Naar homepagina.",
   "emailLabel": "E-mail",
   "passwordLabel": "Wachtwoord",
   "passwor_confirmation": "Wachtwoord confirmatie",

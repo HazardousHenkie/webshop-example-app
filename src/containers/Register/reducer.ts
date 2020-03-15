@@ -14,8 +14,8 @@ function registerReducer(
   switch (action.type) {
     case ActionTypes.REGISTER:
       return {
-        message: state.message,
-        error: state.error,
+        message: false,
+        error: false,
         loading: true
       }
     case ActionTypes.REGISTER_SUCCESS:
